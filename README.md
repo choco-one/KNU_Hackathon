@@ -1,1 +1,1 @@
-# knu_hackathon
+# KNU_Hackathon

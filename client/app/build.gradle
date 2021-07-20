@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "com.example.hackathon_client"
@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
