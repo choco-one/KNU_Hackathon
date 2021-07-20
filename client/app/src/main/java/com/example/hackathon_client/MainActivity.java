@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    List<GridItem> itemList = new ArrayList<>();
+    int position;
 
     public interface ImageItemClickListener {
         void onImageItemClick(String a_name, int a_position) ;
@@ -28,10 +30,29 @@ public class MainActivity extends AppCompatActivity {
 
         bindGrid();
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                //데이터 받기
+                String result = data.getStringExtra("result");
+                if(result.equals("Student")) {
+                    itemList.remove(position);
+                    itemList.add(new GridItem(R.drawable.loading, "mentee"));
+                    itemList.add(new GridItem(R.drawable.plus_icon, "create"));
+                    mGridAdapter.notifyDataSetChanged();
+                }
+                else if(result.equals("Graduate")) {
+                    itemList.remove(position);
+                    itemList.add(new GridItem(R.drawable.mortarboard, "mentee"));
+                    itemList.add(new GridItem(R.drawable.plus_icon, "create"));
+                    mGridAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
     private void bindGrid() {
-        // Grid item 생성
-        List<GridItem> itemList = new ArrayList<>();
         itemList.add(new GridItem(R.drawable.plus_icon, "create"));
 
         GridView gridView = (GridView) findViewById(R.id.gridview);
@@ -42,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
                 if(a_name == "create") {
-                    itemList.remove(a_position);
-                    itemList.add(new GridItem(R.drawable.loading, "mentee"));
-                    itemList.add(new GridItem(R.drawable.plus_icon, "create"));
-                    mGridAdapter.notifyDataSetChanged();
+                    // popup
+                    Intent intent = new Intent(MainActivity.this, PopupActivity.class);
+                    startActivityForResult(intent, 1);
+                    position = a_position;
                 }
                 else if(a_name == "mentee") {
                     // 멘티랑 1대1 채팅방 실행
+
                 }
             }
         });
-
         gridView.setAdapter(mGridAdapter);
     }
 }
