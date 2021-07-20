@@ -47,4 +47,10 @@ public class User {
         this.userType = joinRequest.getUserType();
         this.major = joinRequest.getMajor();
     }
+
+    public void update(String std_number, String career, String interest){
+        this.std_number = std_number;
+        this.career = career;
+        this.interest = interest;
+    }
 }
