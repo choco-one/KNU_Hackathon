@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".MatchingPopupActivity" android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>
