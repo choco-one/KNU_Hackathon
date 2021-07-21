@@ -5,16 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     List<GridItem> itemList = new ArrayList<>();
+    private Button btn_mypage;
     int position;
 
     public interface ImageItemClickListener {
@@ -27,6 +26,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btn_mypage = findViewById(R.id.btn_mypage);
+
+        btn_mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
         bindGrid();
     }
@@ -64,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public void onImageItemClick(String a_name, int a_position) {
                 if(a_name == "create") {
                     // popup
-                    Intent intent = new Intent(MainActivity.this, PopupActivity.class);
+                    Intent intent = new Intent(MainActivity.this, UserTypePopupActivity.class);
                     startActivityForResult(intent, 1);
                     position = a_position;
                 }

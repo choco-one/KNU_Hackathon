@@ -7,13 +7,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
-public class PopupActivity extends Activity {
+public class UserTypePopupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_popup);
+        setContentView(R.layout.activity_usertype_popup);
     }
 
     public void mOnClickStudent(View v){
@@ -22,7 +22,7 @@ public class PopupActivity extends Activity {
         intent.putExtra("result", "Student");
         setResult(RESULT_OK, intent);
         finish();
-        Intent intent2 = new Intent(PopupActivity.this, MatchingPopupActivity.class);
+        Intent intent2 = new Intent(UserTypePopupActivity.this, MatchingPopupActivity.class);
         startActivityForResult(intent2, 1);
     }
 
@@ -33,7 +33,7 @@ public class PopupActivity extends Activity {
         setResult(RESULT_OK, intent);
         //액티비티(팝업) 닫기
         finish();
-        Intent intent2 = new Intent(PopupActivity.this, MatchingPopupActivity.class);
+        Intent intent2 = new Intent(UserTypePopupActivity.this, MatchingPopupActivity.class);
         startActivityForResult(intent2, 1);
     }
 

@@ -14,7 +14,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".SigninActivity"/>
-        <activity android:name=".ChatListActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignupActivity"/>
         <activity android:name=".MypageActivity"/>
@@ -28,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".UserTypePopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".MatchingPopupActivity" android:theme="@android:style/Theme.Dialog" />
     </application>
 
