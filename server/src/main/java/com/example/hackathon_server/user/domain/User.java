@@ -2,12 +2,15 @@ package com.example.hackathon_server.user.domain;
 
 import com.example.hackathon_server.user.dto.JoinRequest;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Getter
 @Access(AccessType.FIELD)
 public class User {
+
     private String name;
 
     private String email;
@@ -35,8 +38,6 @@ public class User {
     private String career;
 
     private String interest;
-
-    protected User() {}
 
     public User(JoinRequest joinRequest){
         this.name = joinRequest.getName();
