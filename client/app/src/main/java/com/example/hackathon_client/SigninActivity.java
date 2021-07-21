@@ -71,7 +71,9 @@ public class SigninActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    String stEmail = et_id.getText().toString();
                     Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                    intent.putExtra("email", stEmail);
                     startActivity(intent);
                     finish();
                 } else {

@@ -1,13 +1,22 @@
 package com.example.hackathon_client;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     List<GridItem> itemList = new ArrayList<>();
     private Button btn_mypage;
     int position;
+
+    String stEmail;
+    private static final String TAG = "MainActivity";
 
     public interface ImageItemClickListener {
         void onImageItemClick(String a_name, int a_position) ;
@@ -84,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         mGridAdapter.setImageItemClickListener(new ImageItemClickListener() {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
+                stEmail = getIntent().getStringExtra("email");
                 if(a_name == "create") {
                     // popup
                     Intent intent = new Intent(MainActivity.this, UserTypePopupActivity.class);
@@ -92,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(a_name == "mentee") {
                     // 멘티랑 1대1 채팅방 실행
+                    Intent in = new Intent(MainActivity.this, ChatActivity.class);
 
+                    in.putExtra("email", stEmail);
+                    startActivity(in);
                 }
             }
         });
