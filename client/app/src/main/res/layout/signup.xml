@@ -5,19 +5,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff7e9"
-    tools:context=".MainActivity">
+    tools:context=".SigninActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="130dp"
             android:layout_weight="1"
             >
 
@@ -29,48 +32,30 @@
                 android:background="@drawable/edge1"
                 android:gravity="left|center"
                 android:hint="이 름"
-                android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:textColorHint="#888888"
                 android:textSize="14dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/signup_id"
-                    android:layout_width="230dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/edge1"
-                    android:gravity="left|center"
-                    android:hint="example@knu.ac.kr"
-                    android:textColorHint="#888888"
-                    android:paddingLeft="20dp"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-                <LinearLayout
-                    android:layout_width="10dp"
-                    android:layout_height="40dp"/>
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/edge3"
-                    android:text="인증"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-
-            </LinearLayout>
-
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:privateImeOptions="defaultInputmode=korean"/>
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/signup_email"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edge1"
+                android:gravity="left|center"
+                android:hint="example@knu.ac.kr"
+                android:textColor="@color/black"
+                android:textColorHint="#888888"
+                android:paddingLeft="20dp"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/signup_password"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -78,6 +63,7 @@
                 android:background="@drawable/edge1"
                 android:gravity="left|center"
                 android:hint="비밀번호"
+                android:textColor="@color/black"
                 android:textColorHint="#888888"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
@@ -93,6 +79,7 @@
                 android:background="@drawable/edge1"
                 android:gravity="left|center"
                 android:hint="전화번호"
+                android:textColor="@color/black"
                 android:inputType="phone"
                 android:textColorHint="#888888"
                 android:paddingLeft="20dp"
@@ -109,13 +96,14 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="전공"
                     android:textStyle="bold"
                     android:textColor="#DC8181"
                     android:textSize="16dp" />
                 <RadioGroup
+                    android:id="@+id/major"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -126,7 +114,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:button="@drawable/custom_radio_button"
-                        android:text="  심컴"
+                        android:text="심컴"
+                        android:paddingLeft="5dp"
                         android:layout_marginRight="50dp"
                         android:textColor="#3D3838" />
 
@@ -136,7 +125,8 @@
                         android:layout_height="wrap_content"
                         android:button="@drawable/custom_radio_button"
                         android:textColor="#3D3838"
-                        android:text="  글솝" />
+                        android:paddingLeft="5dp"
+                        android:text="글솦" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -151,12 +141,13 @@
                     android:text="성별"
                     android:textSize="16dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="#DC8181"
                     />
                 <RadioGroup
+                    android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -169,37 +160,89 @@
                         android:button="@drawable/custom_radio_button"
                         android:layout_marginRight="50dp"
                         android:textColor="#3D3838"
-                        android:text="  남자" />
+                        android:paddingLeft="5dp"
+                        android:text="남자" />
 
                     <RadioButton
                         android:id="@+id/woman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:button="@drawable/custom_radio_button"
                         android:textColor="#3D3838"
-                        android:text="  여자" />
+                        android:paddingLeft="5dp"
+                        android:text="여자" />
                 </RadioGroup>
-
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:text="구분"
+                    android:textSize="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#DC8181"
+                    />
+                <RadioGroup
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
+                    <RadioButton
+                        android:id="@+id/postman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:layout_marginRight="10dp"
+                        android:textColor="#3D3838"
+                        android:paddingLeft="5dp"
+                        android:text="신입생" />
 
+                    <RadioButton
+                        android:id="@+id/student"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:layout_marginRight="10dp"
+                        android:textColor="#3D3838"
+                        android:paddingLeft="5dp"
+                        android:text="재학생" />
+
+                    <RadioButton
+                        android:id="@+id/graduate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:textColor="#3D3838"
+                        android:paddingLeft="5dp"
+                        android:text="졸업생" />
+                </RadioGroup>
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btn_signin"
+                android:id="@+id/btn_signup"
                 app:backgroundTint="@null"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/edge3"
-                android:text="회 원 가 입"
+                android:text="이메일 인증하고 회원가입"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
