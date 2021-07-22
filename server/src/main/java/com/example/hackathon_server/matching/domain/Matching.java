@@ -1,6 +1,7 @@
 package com.example.hackathon_server.matching.domain;
 
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.user.domain.Company;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
 import com.example.hackathon_server.user.domain.UserType;
@@ -35,6 +36,10 @@ public class Matching {
     @Column(length = 8)
     private Major major;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 9)
+    private Company company;
+
     private String matchingOption;
 
     public Matching(AddRequest addRequest){
@@ -43,6 +48,7 @@ public class Matching {
         this.matchingType = addRequest.getMatchingType();
         this.gender = addRequest.getGender();
         this.major = addRequest.getMajor();
+        this.company = addRequest.getCompany();
     }
 
     public void setMatchingOption(String matchingOption) {

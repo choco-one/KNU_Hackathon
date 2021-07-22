@@ -21,13 +21,8 @@ public class MatchingController {
         return matchingService.add(new AddRequest(map));
     }
 
-    @GetMapping("/api/matching/{id}")
-    public Matching info(@PathVariable String id) throws Exception{
-        return matchingService.info(id);
-    }
-
-    @DeleteMapping("/api/matching/{email}")
-    public String delete(@PathVariable String id) throws Exception {
-        return matchingService.delete(id);
+    @PostMapping("/api/matching/gadd")
+    public String gadd(@RequestParam Map map) throws Exception{
+        return matchingService.gadd(new AddRequest(map));
     }
 }

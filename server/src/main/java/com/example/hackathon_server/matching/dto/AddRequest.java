@@ -1,6 +1,7 @@
 package com.example.hackathon_server.matching.dto;
 
 import com.example.hackathon_server.matching.domain.MatchingType;
+import com.example.hackathon_server.user.domain.Company;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
 import com.example.hackathon_server.user.domain.UserType;
@@ -37,13 +38,9 @@ public class AddRequest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public AddRequest(String email, UserType userType, MatchingType matchingType, Major major, Gender gender){
-        this.email = email;
-        this.userType = userType;
-        this.matchingType = matchingType;
-        this.major = major;
-        this.gender = gender;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(length = 9)
+    private Company company;
 
     public AddRequest(Map map){
         this.email = map.get("email").toString();
@@ -51,5 +48,6 @@ public class AddRequest {
         this.matchingType = MatchingType.valueOf((map.get("matchingType").toString()));
         this.major = Major.valueOf((map.get("major").toString()));
         this.gender = Gender.valueOf((map.get("gender").toString()));
+        this.company = Company.valueOf((map.get("company").toString()));
     }
 }
