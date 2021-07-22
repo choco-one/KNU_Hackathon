@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class GraduatePopupActivity extends Activity {
     @Override
@@ -18,6 +20,15 @@ public class GraduatePopupActivity extends Activity {
 
     //확인 버튼 클릭
     public void mOnClose(View v){
+        final RadioGroup rg_company = (RadioGroup) findViewById(R.id.radioGroup_company);
+        RadioButton rb_company = (RadioButton) findViewById(rg_company.getCheckedRadioButtonId());
+        String selected_company = (String) rb_company.getText();
+
+        if(selected_company.equals("공기업")){
+            selected_company = "PUBLICCO";
+        } else{
+            selected_company = "PRIVATECO";
+        }
         //데이터 전달하기
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");

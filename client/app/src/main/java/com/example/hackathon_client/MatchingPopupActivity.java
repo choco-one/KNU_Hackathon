@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class MatchingPopupActivity extends Activity {
     @Override
@@ -18,6 +21,25 @@ public class MatchingPopupActivity extends Activity {
 
     //확인 버튼 클릭
     public void mOnClose(View v){
+        final RadioGroup rg_major = (RadioGroup) findViewById(R.id.radioGroup_major);
+        RadioButton rb_major = (RadioButton) findViewById(rg_major.getCheckedRadioButtonId());
+        String selected_major = (String) rb_major.getText();
+
+        final RadioGroup rg_gender = (RadioGroup) findViewById(R.id.radioGroup_gender);
+        RadioButton rb_gender = (RadioButton) findViewById(rg_gender.getCheckedRadioButtonId());
+        String selected_gender = (String) rb_gender.getText();
+
+        if(selected_major.equals("심컴")){
+            selected_major = "ADVANCED";
+        } else{
+            selected_major = "GLOBALSW";
+        }
+        if(selected_gender.equals("남자")){
+            selected_gender = "MALE";
+        } else{
+            selected_gender = "FEMALE";
+        }
+
         //데이터 전달하기
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");

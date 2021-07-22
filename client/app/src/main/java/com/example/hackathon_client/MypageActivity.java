@@ -147,10 +147,12 @@ public class MypageActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent a = new Intent(MypageActivity.this, MainActivity.class);
+                        a.putExtra("usr_id", usr_id);
                         startActivity(a);
                         break;
                     case R.id.navigation_list:
                         Intent b = new Intent(MypageActivity.this, MentoListActivity.class);
+                        b.putExtra("usr_id", usr_id);
                         startActivity(b);
                         break;
                     case R.id.navigation_mypage:
@@ -159,6 +161,7 @@ public class MypageActivity extends AppCompatActivity {
                 return false;
             }
         });
+        navigation.getMenu().getItem(2).setChecked(true);
     }
 
     @Override

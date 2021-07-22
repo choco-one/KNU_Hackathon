@@ -3,18 +3,18 @@
     <item
         android:id="@+id/navigation_home"
         android:enabled="true"
-        android:icon="@drawable/loading"
+        android:icon="@drawable/home"
         android:title=""/>
 
     <item
         android:id="@+id/navigation_list"
         android:enabled="true"
-        android:icon="@drawable/plus_icon"
+        android:icon="@drawable/tasks"
         android:title=""/>
 
     <item
         android:id="@+id/navigation_mypage"
         android:enabled="true"
-        android:icon="@drawable/person"
+        android:icon="@drawable/user"
         android:title=""/>
 </menu>

@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        navigation.getMenu().getItem(0).setChecked(true);
 
         bindGrid();
     }
