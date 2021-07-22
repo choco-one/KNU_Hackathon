@@ -79,6 +79,7 @@
             android:text="확인"
             android:textSize="15sp"
             android:textColor="#DC8181"
+            android:textStyle="bold"
             android:padding="16dp"
             android:gravity="center"
             android:background="#00000000"

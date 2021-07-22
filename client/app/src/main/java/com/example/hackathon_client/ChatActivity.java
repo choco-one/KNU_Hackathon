@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 
-public class ChatActivity extends AppCompatActivity {
+public class
+
+ChatActivity extends AppCompatActivity {
 
     private static final String TAG = "ChatActivity";
     private RecyclerView recyclerView;

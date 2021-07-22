@@ -9,14 +9,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     List<GridItem> itemList = new ArrayList<>();
@@ -28,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     String stEmail;
     ChatRoom chatRoom = new ChatRoom();
+
+    public User user;
+    private RequestQueue queue;
     private static final String TAG = "MainActivity";
 
     public interface ImageItemClickListener {
@@ -54,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
 
+        queue = Volley.newRequestQueue(this);
+        String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user/" + usr_id_from_login;
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -65,11 +84,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_list:
                         Intent a = new Intent(MainActivity.this, MentoListActivity.class);
                         a.putExtra("usr_id", usr_id_from_login);
+                        a.putExtra("usr_type", user.userType);
                         startActivity(a);
                         break;
                     case R.id.navigation_mypage:
                         Intent b = new Intent(MainActivity.this, MypageActivity.class);
                         b.putExtra("usr_id", usr_id_from_login);
+                        b.putExtra("usr_type", user.userType);
                         startActivity(b);
                         break;
                 }
@@ -79,6 +100,40 @@ public class MainActivity extends AppCompatActivity {
         navigation.getMenu().getItem(0).setChecked(true);
 
         bindGrid();
+
+        //유저 받아오기
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                user = gson.fromJson(response, User.class);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
+        };
+
+        stringRequest.setTag(TAG);
+        queue.add(stringRequest);
     }
 
     @Override
@@ -124,6 +179,9 @@ public class MainActivity extends AppCompatActivity {
                 if(a_name == "create") {
                     // popup
                     Intent intent = new Intent(MainActivity.this, UserTypePopupActivity.class);
+                    intent.putExtra("usr_id", stEmail);
+                    intent.putExtra("usr_type", user.userType);
+
                     startActivityForResult(intent, 1);
                     position = a_position;
 

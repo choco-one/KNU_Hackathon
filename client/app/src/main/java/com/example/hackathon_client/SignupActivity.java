@@ -56,9 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     public String std_num;
 
     public StringRequest stringRequest;
-
     public RequestQueue queue;
-
     private static final String TAG = "SignupActivity";
 
     // 비밀번호 정규식
@@ -181,7 +179,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 int selectedId_company = company.getCheckedRadioButtonId();
                 RadioButton radioButton_company = (RadioButton) findViewById(selectedId_company);
-                user_company = radioButton_gender.getText().toString();
+                user_company = radioButton_company.getText().toString();
 
                 if(user_company.equals("공기업")){
                     user_company = "PUBLICCO";
@@ -218,7 +216,6 @@ public class SignupActivity extends AppCompatActivity {
                         // 회원가입 성공
 
                         // real time database에 유저 정보 저장...
-
                         FirebaseUser user = firebaseAuth.getCurrentUser();
 
                         // user information save
@@ -236,8 +233,12 @@ public class SignupActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
                                     FirebaseAuth.getInstance().signOut();
-                                    startActivity(new Intent(SignupActivity.this, SignupActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, SigninActivity.class));
+
+                                    Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
+                                    firebaseAuth.addAuthStateListener(firebaseAuthListener);
                                     finish();
+
                                 } else
                                 {
                                     // email not sent, so display message and restart the activity or do whatever you wish to do
@@ -245,15 +246,13 @@ public class SignupActivity extends AppCompatActivity {
                                     //restart this activity
                                     overridePendingTransition(0, 0);
                                     finish();
-                                    overridePendingTransition(0, 0);
                                     startActivity(getIntent());
                                 }
                             }
                         });
 
-                        Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
-                        firebaseAuth.addAuthStateListener(firebaseAuthListener);
                         push(name, email, password, std_num, phone, user_type, user_major, user_gender, user_company);
+                        finish();
 
                     } else {
                         // 회원가입 실패

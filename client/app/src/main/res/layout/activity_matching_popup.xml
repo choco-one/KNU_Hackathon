@@ -49,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@drawable/custom_radio_button"
-                android:text="  심컴"
+                android:text="심컴"
+                android:paddingLeft="5dp"
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838" />
             <RadioButton
@@ -58,15 +59,17 @@
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_radio_button"
                 android:textColor="#3D3838"
+                android:paddingLeft="5dp"
                 android:layout_marginRight="15dp"
-                android:text="  글솝" />
+                android:text="글솝" />
             <RadioButton
                 android:id="@+id/any_major"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:button="@drawable/custom_radio_button"
                 android:textColor="#3D3838"
-                android:text="  상관 없음" />
+                android:text="상관 없음" />
         </RadioGroup>
     </LinearLayout>
     <LinearLayout
@@ -96,26 +99,29 @@
                 android:id="@+id/man"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:button="@drawable/custom_radio_button"
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838"
-                android:text="  남자" />
+                android:text="남자" />
 
             <RadioButton
                 android:id="@+id/woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:button="@drawable/custom_radio_button"
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838"
-                android:text="  여자" />
+                android:text="여자" />
             <RadioButton
                 android:id="@+id/any_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_radio_button"
                 android:textColor="#3D3838"
-                android:text="  상관 없음" />
+                android:paddingLeft="5dp"
+                android:text="상관 없음" />
         </RadioGroup>
     </LinearLayout>
 
@@ -132,6 +138,7 @@
             android:textSize="15sp"
             android:textColor="#DC8181"
             android:padding="16dp"
+            android:textStyle="bold"
             android:gravity="center"
             android:background="#00000000"
             android:layout_width="match_parent"

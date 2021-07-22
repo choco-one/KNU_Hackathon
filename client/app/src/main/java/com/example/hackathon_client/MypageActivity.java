@@ -136,7 +136,7 @@ public class MypageActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
 
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

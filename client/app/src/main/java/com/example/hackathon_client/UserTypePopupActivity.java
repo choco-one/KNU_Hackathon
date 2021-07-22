@@ -12,10 +12,13 @@ public class UserTypePopupActivity extends Activity {
     public RadioGroup radioGroup_company;
     public RadioGroup radioGroup_major;
     public RadioGroup radioGroup_gender;
-
+    public String stEmail;
+    public String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        stEmail = getIntent().getStringExtra("usr_id");
+        userType = getIntent().getStringExtra("usr_type");
         //타이틀바 없애기
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -30,6 +33,9 @@ public class UserTypePopupActivity extends Activity {
         setResult(RESULT_OK, intent);
         finish();
         Intent intent2 = new Intent(UserTypePopupActivity.this, MatchingPopupActivity.class);
+        intent2.putExtra("usr_id", stEmail);
+        intent2.putExtra("usr_type", userType);
+
         startActivityForResult(intent2, 1);
     }
 
