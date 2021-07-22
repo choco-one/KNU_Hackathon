@@ -46,8 +46,6 @@ public class AddRequest {
         this.email = map.get("email").toString();
         this.userType = UserType.valueOf(map.get("userType").toString());
         this.matchingType = MatchingType.valueOf((map.get("matchingType").toString()));
-        this.major = Major.valueOf((map.get("major").toString()));
-        this.gender = Gender.valueOf((map.get("gender").toString()));
         this.company = Company.valueOf((map.get("company").toString()));
     }
 }
