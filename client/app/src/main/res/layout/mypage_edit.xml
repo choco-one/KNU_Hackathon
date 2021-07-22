@@ -41,7 +41,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:layout_width="300dp"
@@ -55,7 +57,6 @@
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="40dp"
-
                                 android:text="이름"
                                 android:gravity="center_vertical"
                                 android:textStyle="bold"
@@ -107,7 +108,7 @@
                                 android:id="@+id/user_gender"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:layout_marginTop="15dp"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
                                 android:textSize="15dp" />
 
@@ -139,15 +140,16 @@
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:text="전공"
                                 android:gravity="center_vertical"
-                                android:textStyle="bold"
+                                android:text="전공"
                                 android:textColor="@color/black"
-                                android:textSize="18dp" />
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
 
                             <RadioGroup
                                 android:id="@+id/major"
@@ -168,7 +170,7 @@
                                 <RadioButton
                                     android:id="@+id/globalSW"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="40dp"
                                     android:button="@drawable/custom_radio_button"
                                     android:textColor="#3D3838"
                                     android:paddingLeft="5dp"
@@ -307,31 +309,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp">
+            android:layout_gravity="center"
+            android:gravity="center">
             <Button
-                android:id="@+id/edit_btn"
-                android:layout_width="0dp"
+                android:id="@+id/editOK_btn"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@drawable/edge3"
-                android:text="수정"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="완료"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/edge3"
-                android:text="로그아웃"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

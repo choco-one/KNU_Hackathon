@@ -3,7 +3,6 @@ package com.example.hackathon_client;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -47,16 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
-        btn_mypage = findViewById(R.id.btn_mypage);
 
-        btn_mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
-
-                startActivity(intent);
-            }
-        });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -67,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_list:
                         Intent a = new Intent(MainActivity.this, MentoListActivity.class);
+                        a.putExtra("usr_id", usr_id_from_login);
                         startActivity(a);
                         break;
                     case R.id.navigation_mypage:

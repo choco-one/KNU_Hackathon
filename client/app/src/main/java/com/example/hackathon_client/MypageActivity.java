@@ -72,7 +72,7 @@ public class MypageActivity extends AppCompatActivity {
                 user = gson.fromJson(response, User.class);
 
                 if(user.major.equals("ADVANCED")){
-                    user.major = "심화컴퓨터공학과";
+                        user.major = "심화컴퓨터공학과";
                 } else{
                     user.major = "글로벌소프트웨어학과";
                 }
@@ -93,12 +93,13 @@ public class MypageActivity extends AppCompatActivity {
 
                 user_email.setText(user.email);
                 user_name.setText(user.name);
+                user_gender.setText(user.gender);
                 user_phone.setText(user.tel_number);
                 user_major.setText(user.major);
                 user_stdnum.setText(user.std_number);
                 user_career.setText(user.career);
                 user_interest.setText(user.interest);
-                user_gender.setText(user.gender);
+
                 user_type.setText(user.userType);
             }
         }, new Response.ErrorListener() {
@@ -138,6 +139,7 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -158,7 +160,6 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onStop() {
