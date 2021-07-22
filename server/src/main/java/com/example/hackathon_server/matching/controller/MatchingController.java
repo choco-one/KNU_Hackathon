@@ -2,6 +2,7 @@ package com.example.hackathon_server.matching.controller;
 
 import com.example.hackathon_server.matching.domain.Matching;
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.matching.dto.GAddRequest;
 import com.example.hackathon_server.matching.service.MatchingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,6 @@ public class MatchingController {
 
     @PostMapping("/api/matching/gadd")
     public String gadd(@RequestParam Map map) throws Exception{
-        return matchingService.gadd(new AddRequest(map));
+        return matchingService.gadd(new GAddRequest(map));
     }
 }
