@@ -2,19 +2,39 @@ package com.example.hackathon_client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MentoListActivity extends AppCompatActivity {
+    private RecyclerView rv;
+    private LinearLayoutManager llm;
+    private List<Integer> count;
+    private int i = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mento_list);
+
+        rv = (RecyclerView) findViewById(R.id.main_rv);
+        llm = new LinearLayoutManager(this);
+
+        count = new ArrayList<>();
+
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
 
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
@@ -41,5 +61,17 @@ public class MentoListActivity extends AppCompatActivity {
             }
         });
         navigation.getMenu().getItem(1).setChecked(true);
+    }
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.main_btn_add : {
+                i ++;
+                count.add(i);
+                RvAdapter adapter = new RvAdapter(getApplication(), count, i);
+                rv.setAdapter(adapter);
+                Log.d("Count", count + "");
+                break;
+            }
+        }
     }
 }

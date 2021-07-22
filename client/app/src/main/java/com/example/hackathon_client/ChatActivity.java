@@ -41,7 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         chatArrayList = new ArrayList<>();
-        stEmail = getIntent().getStringExtra("email");
+        stEmail = getIntent().getStringExtra("usr_id");
 
         Button btnfinish = (Button) findViewById(R.id.btnFinish);
         btnfinish.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,6 @@ public class ChatActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] myDataset = {"test1", "test2", "test3", "test4"};
         mAdapter = new CustomAdapter(chatArrayList, stEmail);
         recyclerView.setAdapter(mAdapter);
 
@@ -126,7 +125,7 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         };
-        DatabaseReference getRef = database.getReference("message");
+        DatabaseReference getRef = database.getReference("Room").child("chatRoom").child("message");
         getRef.addChildEventListener(childEventListener);
 
 
@@ -136,13 +135,11 @@ public class ChatActivity extends AppCompatActivity {
                 String stText = etText.getText().toString();
                 Toast.makeText(ChatActivity.this, "MSG : " + stText, Toast.LENGTH_LONG).show();
 
-
-
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat dataformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String datatime = dataformat.format(c.getTime());
 
-                DatabaseReference myRef = database.getReference("message").child(datatime);
+                DatabaseReference myRef = database.getReference("Room").child("chatRoom").child("message").child(datatime);
 
                 Hashtable<String, String> values = new Hashtable<String, String>();
                 values.put("email", stEmail);
