@@ -58,4 +58,17 @@ public class UserService {
         return apiFuture.get().getUpdateTime().toString();
     }
 
+    public String addFriend(String email, Map map) throws Exception{
+
+        User user = info(email);
+
+        user.getFriend().add(info(map.get("email").toString()));
+
+        Firestore firestore = FirestoreClient.getFirestore();
+
+        ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(user.getEmail()).set(user);
+
+        return apiFuture.get().getUpdateTime().toString();
+    }
+
 }

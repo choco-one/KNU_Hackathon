@@ -14,11 +14,11 @@ public class FirebaseInitialize {
     @PostConstruct
     public void initialize(){
         try {
-            FileInputStream serviceAccount = new FileInputStream("src/main/java/com/example/hackathon_server/firebase/spring-server-c6774-firebase-adminsdk-za134-3aff6ddd7b.json");
+            FileInputStream serviceAccount = new FileInputStream("src/main/java/com/example/hackathon_server/firebase/knu-hackathon-firebase-adminsdk-mi6dv-d07ba398d9.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://spring-server-c6774.firebaseio.com")
+                    .setDatabaseUrl("https://knu-hackathon-default-rtdb.firebaseio.com")
                     .build();
 
             FirebaseApp.initializeApp(options);
