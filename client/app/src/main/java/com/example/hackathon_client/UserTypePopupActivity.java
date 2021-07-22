@@ -6,18 +6,25 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.RadioGroup;
 
 public class UserTypePopupActivity extends Activity {
+    public RadioGroup radioGroup_company;
+    public RadioGroup radioGroup_major;
+    public RadioGroup radioGroup_gender;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_usertype_popup);
     }
 
     public void mOnClickStudent(View v){
         //데이터 전달하기
+
         Intent intent = new Intent();
         intent.putExtra("result", "Student");
         setResult(RESULT_OK, intent);
@@ -28,6 +35,7 @@ public class UserTypePopupActivity extends Activity {
 
     public void mOnClickGraduate(View v){
         //데이터 전달하기
+
         Intent intent = new Intent();
         intent.putExtra("result", "Graduate");
         setResult(RESULT_OK, intent);

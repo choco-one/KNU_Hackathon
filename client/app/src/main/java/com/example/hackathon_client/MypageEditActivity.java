@@ -172,6 +172,7 @@ public class MypageEditActivity extends AppCompatActivity {
                     c.putExtra("usr_id", user.email);
                     c.putExtra("user", user);
                     startActivity(c);
+                    finish();
 
                 } catch (Exception e) {
                     e.printStackTrace();

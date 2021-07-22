@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class GraduatePopupActivity extends Activity {
     @Override
@@ -21,21 +22,29 @@ public class GraduatePopupActivity extends Activity {
     //확인 버튼 클릭
     public void mOnClose(View v){
         final RadioGroup rg_company = (RadioGroup) findViewById(R.id.radioGroup_company);
-        RadioButton rb_company = (RadioButton) findViewById(rg_company.getCheckedRadioButtonId());
-        String selected_company = (String) rb_company.getText();
 
-        if(selected_company.equals("공기업")){
-            selected_company = "PUBLICCO";
+        if(rg_company.getCheckedRadioButtonId() != -1){
+            //check
+            RadioButton rb_company = (RadioButton) findViewById(rg_company.getCheckedRadioButtonId());
+            String selected_company = (String) rb_company.getText();
+
+            if(selected_company.equals("공기업")){
+                selected_company = "PUBLICCO";
+            } else{
+                selected_company = "PRIVATECO";
+            }
+            //데이터 전달하기
+            Intent intent = new Intent();
+            intent.putExtra("result", "Close Popup");
+            setResult(RESULT_OK, intent);
+
+            //액티비티(팝업) 닫기
+            finish();
         } else{
-            selected_company = "PRIVATECO";
+            //unchecked
+            Toast.makeText(GraduatePopupActivity.this, "선택을 완료해주세요.", Toast.LENGTH_LONG).show();
         }
-        //데이터 전달하기
-        Intent intent = new Intent();
-        intent.putExtra("result", "Close Popup");
-        setResult(RESULT_OK, intent);
 
-        //액티비티(팝업) 닫기
-        finish();
     }
 
     @Override

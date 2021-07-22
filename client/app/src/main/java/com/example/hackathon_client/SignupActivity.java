@@ -35,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     public EditText editTextPassword;
     public EditText editTextName;
     public EditText editTextPhoneNum;
+    public EditText editTextStd_num;
     public RadioGroup major;
     public RadioGroup gender;
     public RadioGroup state;
@@ -45,6 +46,7 @@ public class SignupActivity extends AppCompatActivity {
     public String email;
     public String phone;
     public String password;
+    public String std_num;
 
     public StringRequest stringRequest;
 
@@ -121,13 +123,16 @@ public class SignupActivity extends AppCompatActivity {
         editTextPhoneNum = findViewById(R.id.signup_phone);
         phone = editTextPhoneNum.getText().toString();
 
+        editTextStd_num = findViewById(R.id.signup_stdnum);
+        std_num = editTextStd_num.getText().toString();
+
         major = findViewById(R.id.major);
 
         gender = findViewById(R.id.gender);
 
         state = findViewById(R.id.state);
 
-        if (!email.equals("") && !password.equals("") && !name.equals("")) {
+        if (!email.equals("") && !password.equals("") && !name.equals("") && !std_num.equals("")) {
             // 이메일과 비밀번호가 공백이 아닌 경우
             if(major.getCheckedRadioButtonId() != -1 && gender.getCheckedRadioButtonId() != -1 && state.getCheckedRadioButtonId() != -1 ){
                 //라디오버튼 체크 된 경우
@@ -192,7 +197,7 @@ public class SignupActivity extends AppCompatActivity {
 
                         Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                         firebaseAuth.addAuthStateListener(firebaseAuthListener);
-                        push(name, email, password, phone, user_type, user_major, user_gender);
+                        push(name, email, password, std_num, phone, user_type, user_major, user_gender);
 
                     } else {
                         // 회원가입 실패
@@ -210,7 +215,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    void push(String name, String email, String password, String phone, String user_type, String user_major, String user_gender){
+    void push(String name, String email, String password, String std_num, String phone, String user_type, String user_major, String user_gender){
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -230,6 +235,7 @@ public class SignupActivity extends AppCompatActivity {
                 params.put("password", password);
                 params.put("tel_number", phone);
                 params.put("userType", user_type);
+                params.put("std_number", std_num);
                 params.put("major", user_major);
                 params.put("gender", user_gender);
                 return params;
