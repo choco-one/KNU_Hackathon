@@ -171,7 +171,7 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="40dp"
@@ -216,7 +216,7 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="40dp"
@@ -266,13 +266,63 @@
                 </RadioGroup>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="직종"
+                    android:textStyle="bold"
+                    android:textColor="#DC8181"
+                    android:textSize="16dp" />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/radioGroup_company">
+                    <RadioButton
+                        android:id="@+id/public_co"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:text="공기업"
+                        android:paddingLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="#3D3838" />
+                    <RadioButton
+                        android:id="@+id/private_co"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:textColor="#3D3838"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:text="사기업" />
+                    <RadioButton
+                        android:id="@+id/any_major"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/custom_radio_button"
+                        android:paddingLeft="5dp"
+                        android:textColor="#3D3838"
+                        android:text="없음" />
+                </RadioGroup>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_signup"
                 app:backgroundTint="@null"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/edge3"
                 android:text="이메일 인증하고 회원가입"
                 android:textColor="#FFFFFF"

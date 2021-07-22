@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#fff7e9"
+    android:background="@drawable/popup_back"
     android:orientation="vertical"
     android:layout_width="350dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+
+    >
 
     <LinearLayout
         android:orientation="horizontal"
