@@ -50,12 +50,14 @@
                         <LinearLayout
                             android:layout_width="300dp"
                             android:layout_height="40dp"
+                            android:layout_marginTop="20dp"
                             android:orientation="horizontal">
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
-                                android:layout_marginTop="20dp"
+
                                 android:text="이름"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
@@ -63,8 +65,7 @@
                                 android:id="@+id/user_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-
-                                android:layout_marginTop="20dp"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
                                 android:textSize="15dp" />
                         </LinearLayout>
@@ -76,8 +77,8 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
-                                android:layout_marginTop="15dp"
                                 android:text="이메일"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
@@ -85,8 +86,7 @@
                                 android:id="@+id/user_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:layout_marginTop="15dp"
-
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
                                 android:textSize="15dp" />
 
@@ -99,8 +99,8 @@
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 android:text="성별"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
-                                android:layout_marginTop="15dp"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
                             <TextView
@@ -118,19 +118,20 @@
                             android:orientation="horizontal">
                             <TextView
                                 android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:text="전화번호"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_phone"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:textColorHint="#888888"
                                 android:textSize="15dp" />
                         </LinearLayout>
                         <LinearLayout
@@ -140,18 +141,19 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
                                 android:text="전공"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_major"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:textColorHint="#888888"
                                 android:textSize="15dp" />
                         </LinearLayout>
                         <LinearLayout
@@ -161,16 +163,18 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
                                 android:text="학번"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_stdnum"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
                                 android:textColorHint="#888888"
                                 android:textSize="15dp" />
@@ -182,18 +186,19 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="5dp"
                                 android:text="학적"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_type"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:textColorHint="#888888"
                                 android:textSize="15dp"/>
                         </LinearLayout>
                         <LinearLayout
@@ -203,18 +208,19 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
                                 android:text="희망진로"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_career"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:textColorHint="#888888"
                                 android:textSize="15dp" />
                         </LinearLayout>
                         <LinearLayout
@@ -224,18 +230,19 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
                                 android:text="관심사"
+                                android:gravity="center_vertical"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
-                            <TextView
+                            <EditText
                                 android:id="@+id/user_interest"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:textColorHint="#888888"
                                 android:textSize="15dp" />
                         </LinearLayout>
                     </LinearLayout>

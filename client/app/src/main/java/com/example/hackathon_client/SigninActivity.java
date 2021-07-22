@@ -21,7 +21,9 @@ public class SigninActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
-    private EditText et_id, et_password;
+    public EditText et_id, et_password;
+    public String usr_id;
+    public String usr_password;
     private Button btn_signin;
     private TextView btn_signup;
     private static final String TAG = "Login";
@@ -43,10 +45,12 @@ public class SigninActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usr_id = et_id.getText().toString();
-                String usr_password = et_password.getText().toString();
+                usr_id = et_id.getText().toString();
+                usr_password = et_password.getText().toString();
 
                 if (!usr_id.equals("") && !usr_password.equals("")) {
+
+
                     loginUser(usr_id, usr_password);
                 } else {
                     Toast.makeText(SigninActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
@@ -61,6 +65,8 @@ public class SigninActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(SigninActivity.this, ChatListActivity.class);
+
+                    intent.putExtra("usr_id", usr_id);
                     startActivity(intent);
                     finish();
                 } else {
