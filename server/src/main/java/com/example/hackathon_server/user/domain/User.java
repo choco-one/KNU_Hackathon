@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -39,6 +40,8 @@ public class User {
     private String career;
 
     private String interest;
+
+    private List<User> friend;
 
     public User(JoinRequest joinRequest){
         this.name = joinRequest.getName();

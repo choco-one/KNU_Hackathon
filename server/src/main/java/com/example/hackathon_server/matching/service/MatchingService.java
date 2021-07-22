@@ -2,6 +2,7 @@ package com.example.hackathon_server.matching.service;
 
 import com.example.hackathon_server.matching.domain.Matching;
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.matching.dto.FindRequest;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
 import com.example.hackathon_server.user.domain.UserType;
@@ -57,13 +58,13 @@ public class MatchingService {
         return "Matching ID: " + id + " deleted";
     }
 
-//    public List<Matching> find(UserType userType, Major major, Gender gender){
+//    public List<Matching> find(FindRequest findRequest){
 //
-//        if(userType.toString().equals("Freshman")){
+//        Firestore firestore = FirestoreClient.getFirestore();
 //
-//        }
+//        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).
 //
-//        else if(userType.toString().equals("Senior")){
+//        if(findRequest.getMatchingType().toString().equals("STUDENT")){
 //
 //        }
 //
