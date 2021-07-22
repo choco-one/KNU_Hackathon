@@ -18,11 +18,8 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".ChatActivity" />
         <activity android:name=".MypageActivity"/>
-<<<<<<< HEAD
         <activity android:name=".MypageEditActivity"/>
-=======
         <activity android:name=".MentoListActivity"/>
->>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
 
         <activity
             android:name=".SplashActivity"

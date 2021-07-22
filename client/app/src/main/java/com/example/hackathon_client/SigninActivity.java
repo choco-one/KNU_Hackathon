@@ -75,15 +75,8 @@ public class SigninActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-<<<<<<< HEAD
-                    Intent intent = new Intent(SigninActivity.this, ChatListActivity.class);
-
-                    intent.putExtra("usr_id", usr_id);
-=======
-                    String stEmail = et_id.getText().toString();
                     Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                    intent.putExtra("email", stEmail);
->>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
+                    intent.putExtra("usr_id", usr_id);
                     startActivity(intent);
                     finish();
                 } else {

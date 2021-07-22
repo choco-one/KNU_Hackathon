@@ -14,7 +14,7 @@ public class ChatListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_list);
+        setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
 
@@ -26,7 +26,7 @@ public class ChatListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChatListActivity.this, MypageActivity.class);
-                intent.putExtra("usr_id", usr_id_from_login);
+
 
                 startActivity(intent);
             }

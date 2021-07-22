@@ -2,11 +2,12 @@ package com.example.hackathon_client;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -19,18 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-=======
-import androidx.annotation.NonNull;
-import android.view.MenuItem;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
->>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
 
 public class MypageActivity extends AppCompatActivity {
 
@@ -51,7 +45,7 @@ public class MypageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
-<<<<<<< HEAD
+
         user_email = findViewById(R.id.user_email);
         user_name = findViewById(R.id.user_name);
         user_phone = findViewById(R.id.user_phone);
@@ -142,8 +136,8 @@ public class MypageActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 finish();
-=======
-
+            }
+        });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -161,10 +155,10 @@ public class MypageActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
->>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
             }
         });
     }
+
 
     @Override
     protected void onStop() {
@@ -173,5 +167,4 @@ public class MypageActivity extends AppCompatActivity {
             queue.cancelAll(TAG);
         }
     }
-
 }

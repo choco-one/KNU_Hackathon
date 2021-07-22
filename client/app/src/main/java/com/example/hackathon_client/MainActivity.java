@@ -1,24 +1,17 @@
 package com.example.hackathon_client;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent = getIntent();
+        String usr_id_from_login = intent.getStringExtra("usr_id");
         btn_mypage = findViewById(R.id.btn_mypage);
 
         btn_mypage.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         break;
@@ -76,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_mypage:
                         Intent b = new Intent(MainActivity.this, MypageActivity.class);
+
+                        b.putExtra("usr_id", usr_id_from_login);
                         startActivity(b);
                         break;
                 }

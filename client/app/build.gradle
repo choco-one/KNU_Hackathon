@@ -40,10 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:28.2.1')
     implementation 'com.google.firebase:firebase-analytics'
-<<<<<<< HEAD
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.7'
-=======
     implementation 'com.firebase:firebase-client-android:2.5.0'
->>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
 }
