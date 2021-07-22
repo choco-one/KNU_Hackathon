@@ -21,13 +21,13 @@ public class MatchingController {
         return matchingService.add(new AddRequest(map));
     }
 
-    @GetMapping("/api/matching/{email}")
-    public Matching info(@PathVariable String email) throws Exception{
-        return matchingService.info(email);
+    @GetMapping("/api/matching/{id}")
+    public Matching info(@PathVariable String id) throws Exception{
+        return matchingService.info(id);
     }
 
     @DeleteMapping("/api/matching/{email}")
-    public String delete(@PathVariable String email) throws Exception {
-        return matchingService.delete(email);
+    public String delete(@PathVariable String id) throws Exception {
+        return matchingService.delete(id);
     }
 }

@@ -8,11 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @Access(AccessType.FIELD)
 public class Matching {
+
+    String id = UUID.randomUUID().toString();
 
     private String email;
 
