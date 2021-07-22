@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
@@ -33,6 +34,9 @@ public class JoinRequest {
     @Pattern(regexp = "[0-9]{10,11}")
     private String tel_number;
 
+    @Column(length = 2)
+    private String std_number;
+
     @NotBlank
     @Enumerated(EnumType.STRING)
     private UserType userType;
@@ -45,11 +49,12 @@ public class JoinRequest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public JoinRequest(String name, String email, String password, String tel_number, UserType userType, Major major, Gender gender){
+    public JoinRequest(String name, String email, String password, String tel_number, String std_number, UserType userType, Major major, Gender gender){
         this.name = name;
         this.email = email;
         this.password = password;
         this.tel_number = tel_number;
+        this.std_number = std_number;
         this.userType = userType;
         this.major = major;
         this.gender = gender;
@@ -60,6 +65,7 @@ public class JoinRequest {
         this.email = map.get("email").toString();
         this.password = map.get("password").toString();
         this.tel_number = map.get("tel_number").toString();
+        this.std_number = map.get("std_number").toString();
         this.userType = UserType.valueOf(map.get("userType").toString());
         this.major = Major.valueOf(map.get("major").toString());
         this.gender = Gender.valueOf(map.get("gender").toString());

@@ -23,10 +23,10 @@ public class MatchingController {
         return matchingService.add(new AddRequest(map));
     }
 
-    @PostMapping("/api/matching/find")
-    public List<Matching> find(@RequestParam Map map) throws Exception{
-        return matchingService.find(new FindRequest(map));
-    }
+//    @PostMapping("/api/matching/find")
+//    public List<Matching> find(@RequestParam Map map) throws Exception{
+//        return matchingService.find(new FindRequest(map));
+//    }
 
     @GetMapping("/api/matching/{id}")
     public Matching info(@PathVariable String id) throws Exception{

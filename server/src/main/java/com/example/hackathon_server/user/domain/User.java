@@ -43,11 +43,14 @@ public class User {
 
     private List<User> friend;
 
+    private List<String> chatrooms;
+
     public User(JoinRequest joinRequest){
         this.name = joinRequest.getName();
         this.email = joinRequest.getEmail();
         this.password = joinRequest.getPassword();
         this.tel_number = joinRequest.getTel_number();
+        this.std_number = joinRequest.getStd_number();
         this.gender = joinRequest.getGender();
         this.userType = joinRequest.getUserType();
         this.major = joinRequest.getMajor();

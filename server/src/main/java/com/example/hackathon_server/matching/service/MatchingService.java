@@ -7,10 +7,7 @@ import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
 import com.example.hackathon_server.user.domain.UserType;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
@@ -62,14 +59,12 @@ public class MatchingService {
 //
 //        Firestore firestore = FirestoreClient.getFirestore();
 //
-//        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).
+//        CollectionReference documentSnapshot = firestore.collection();
 //
 //        if(findRequest.getMatchingType().toString().equals("STUDENT")){
-//
 //        }
 //
 //        else{
-//
 //        }
 //    }
 }
