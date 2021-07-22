@@ -17,10 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Hashtable;
 import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
@@ -33,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     // 파이어베이스 인증 객체 생성
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    FirebaseDatabase database;
 
     private Button btn_signup;
 
@@ -43,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
 
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         btn_signup = findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +165,19 @@ public class SignupActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // 회원가입 성공
+
+                        // real time database에 유저 정보 저장...
+
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                        // user information save
+                        DatabaseReference myRef = database.getReference("users").child(user.getUid());
+
+                        Hashtable<String, String> values = new Hashtable<String, String>();
+                        values.put("email", user.getEmail());
+                        values.put("Uid", user.getUid());
+
+                        myRef.setValue(values);
 
                         //이메일 인증 구현해야함
 

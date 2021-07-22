@@ -1,6 +1,7 @@
 package com.example.hackathon_client;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,8 +18,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Hashtable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_mypage;
     int position;
 
+    private String Uid;
+    private String destinaionUid;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    FirebaseDatabase chatRoomdatabase = FirebaseDatabase.getInstance();
+
     String stEmail;
+    ChatRoom chatRoom = new ChatRoom();
     private static final String TAG = "MainActivity";
 
     public interface ImageItemClickListener {
@@ -64,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
         bindGrid();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        chatRoomdatabase = FirebaseDatabase.getInstance();
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 //데이터 받기
@@ -76,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     itemList.add(new GridItem(R.drawable.loading, "mentee"));
                     itemList.add(new GridItem(R.drawable.plus_icon, "create"));
                     mGridAdapter.notifyDataSetChanged();
+
                 }
                 else if(result.equals("Graduate")) {
                     itemList.remove(position);
@@ -92,16 +110,33 @@ public class MainActivity extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.gridview);
         mGridAdapter = new GridArrayAdapter(this, itemList);
 
+
         // Grid item 중 image view click event 처리
         mGridAdapter.setImageItemClickListener(new ImageItemClickListener() {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
                 stEmail = getIntent().getStringExtra("email");
+                DatabaseReference ref = chatRoomdatabase.getReference("Room").child("chatRoom");
+                DatabaseReference userRef = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("chatUid");
+
                 if(a_name == "create") {
                     // popup
                     Intent intent = new Intent(MainActivity.this, UserTypePopupActivity.class);
                     startActivityForResult(intent, 1);
                     position = a_position;
+
+                    // 여기에 채팅방 생성 코드 넣어보자
+                    // random user id 가져와서 생성되게 만들
+
+                    Hashtable<String, String> value = new Hashtable<>();
+//                    DatabaseReference chref = chatRoomdatabase.getReference("chatRoom");
+                    String roomUid = mAuth.getCurrentUser().getUid() + "uiIsSbywnnMJ6xFqeB6FhSULAdw2";
+                    value.put("chatRoomUid", roomUid);
+
+//                    ref.addChildEventListener(childEventListener);
+//                    ref.push().setValue("");
+                    ref.setValue(value);
+                    userRef.setValue(value);
                 }
                 else if(a_name == "mentee") {
                     // 멘티랑 1대1 채팅방 실행
