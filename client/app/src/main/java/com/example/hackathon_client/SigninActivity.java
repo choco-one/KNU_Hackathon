@@ -27,6 +27,17 @@ public class SigninActivity extends AppCompatActivity {
     private Button btn_signin;
     private TextView btn_signup;
     private static final String TAG = "Login";
+    private long backpressedTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backpressedTime + 2000) {
+            backpressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() <= backpressedTime + 2000) {
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +75,15 @@ public class SigninActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+<<<<<<< HEAD
                     Intent intent = new Intent(SigninActivity.this, ChatListActivity.class);
 
                     intent.putExtra("usr_id", usr_id);
+=======
+                    String stEmail = et_id.getText().toString();
+                    Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                    intent.putExtra("email", stEmail);
+>>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
                     startActivity(intent);
                     finish();
                 } else {

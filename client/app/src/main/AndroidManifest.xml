@@ -14,11 +14,15 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".SigninActivity"/>
-        <activity android:name=".ChatListActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignupActivity"/>
+        <activity android:name=".ChatActivity" />
         <activity android:name=".MypageActivity"/>
+<<<<<<< HEAD
         <activity android:name=".MypageEditActivity"/>
+=======
+        <activity android:name=".MentoListActivity"/>
+>>>>>>> 366250f3451e904a2d846c76d9807ae2127f8bf7
 
         <activity
             android:name=".SplashActivity"
@@ -29,6 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserTypePopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".MatchingPopupActivity" android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>
