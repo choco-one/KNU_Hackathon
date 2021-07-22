@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         mGridAdapter.setImageItemClickListener(new ImageItemClickListener() {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
-                stEmail = getIntent().getStringExtra("email");
+                stEmail = getIntent().getStringExtra("usr_id");
+
                 DatabaseReference ref = chatRoomdatabase.getReference("Room").child("chatRoom");
                 DatabaseReference userRef = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("chatUid");
 
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     // 멘티랑 1대1 채팅방 실행
                     Intent in = new Intent(MainActivity.this, ChatActivity.class);
 
-                    in.putExtra("email", stEmail);
+                    in.putExtra("usr_id", stEmail);
                     startActivity(in);
                 }
             }

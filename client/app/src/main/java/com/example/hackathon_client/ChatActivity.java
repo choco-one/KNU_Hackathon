@@ -41,7 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         chatArrayList = new ArrayList<>();
-        stEmail = getIntent().getStringExtra("email");
+        stEmail = getIntent().getStringExtra("usr_id");
 
         Button btnfinish = (Button) findViewById(R.id.btnFinish);
         btnfinish.setOnClickListener(new View.OnClickListener() {
