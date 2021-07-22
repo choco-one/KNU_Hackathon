@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:gravity="center"
-            android:text="Matching Option"
+            android:text="매칭 옵션"
+            android:textStyle="bold"
             android:textColor="#fff"
             android:textSize="20sp" />
     </LinearLayout>

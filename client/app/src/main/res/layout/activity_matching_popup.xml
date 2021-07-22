@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edge3">
         <TextView
-            android:text="Matching Option"
+            android:text="매칭 옵션"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"

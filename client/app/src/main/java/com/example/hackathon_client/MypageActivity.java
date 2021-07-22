@@ -163,12 +163,4 @@ public class MypageActivity extends AppCompatActivity {
         });
         navigation.getMenu().getItem(2).setChecked(true);
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (queue != null) {
-            queue.cancelAll(TAG);
-        }
-    }
 }

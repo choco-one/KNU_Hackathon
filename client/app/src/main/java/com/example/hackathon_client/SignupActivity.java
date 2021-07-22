@@ -230,9 +230,26 @@ public class SignupActivity extends AppCompatActivity {
 
                         myRef.setValue(values);
 
-                        //이메일 인증 구현해야함
+                        //이메일 인증
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    FirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(SignupActivity.this, SignupActivity.class));
+                                    finish();
+                                } else
+                                {
+                                    // email not sent, so display message and restart the activity or do whatever you wish to do
 
-                        //firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new On)
+                                    //restart this activity
+                                    overridePendingTransition(0, 0);
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                    startActivity(getIntent());
+                                }
+                            }
+                        });
 
                         Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                         firebaseAuth.addAuthStateListener(firebaseAuthListener);
