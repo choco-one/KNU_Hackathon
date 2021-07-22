@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Map;
 
 @Getter
 @NoArgsConstructor
@@ -52,5 +53,15 @@ public class JoinRequest {
         this.userType = userType;
         this.major = major;
         this.gender = gender;
+    }
+
+    public JoinRequest(Map map){
+        this.name = map.get("name").toString();
+        this.email = map.get("email").toString();
+        this.password = map.get("password").toString();
+        this.tel_number = map.get("tel_number").toString();
+        this.userType = UserType.valueOf(map.get("userType").toString());
+        this.major = Major.valueOf(map.get("major").toString());
+        this.gender = Gender.valueOf(map.get("gender").toString());
     }
 }

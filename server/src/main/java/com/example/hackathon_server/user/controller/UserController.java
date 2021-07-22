@@ -6,7 +6,10 @@ import com.example.hackathon_server.user.dto.UpdateRequest;
 import com.example.hackathon_server.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -15,9 +18,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/user/join")
-    public String join(@RequestBody JoinRequest joinRequest) throws Exception{
-        return userService.join(joinRequest);
+    @PostMapping(value = "/api/user/join",consumes = "application/x-www-form-urlencoded")
+    public String join(@RequestParam Map map) throws Exception{
+        return userService.join(new JoinRequest(map));
     }
 
     @GetMapping("/api/user/{email}")

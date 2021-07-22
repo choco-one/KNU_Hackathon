@@ -11,13 +11,14 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserService {
 
     public static final String COLLECTION_NAME = "USER";
 
     public String join(JoinRequest joinRequest) throws Exception{
-
         User user = new User(joinRequest);
 
         Firestore firestore = FirestoreClient.getFirestore();
