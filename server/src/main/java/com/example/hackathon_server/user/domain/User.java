@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -45,9 +46,9 @@ public class User {
 
     private String interest;
 
-    private List<User> friend;
+    private List<String> friend = new ArrayList<>(4);
 
-    private List<String> chatrooms;
+    private List<String> chatrooms = new ArrayList<>(4);
 
     public User(JoinRequest joinRequest){
         this.name = joinRequest.getName();

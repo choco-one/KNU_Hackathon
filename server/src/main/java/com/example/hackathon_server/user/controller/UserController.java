@@ -32,7 +32,7 @@ public class UserController {
         return userService.update(email, new UpdateRequest(map));
     }
 
-    @PutMapping("/api/user/friend/{email}")
+    @PutMapping(value = "/api/user/friend/{email}")
     public String addFriend(@PathVariable String email, @RequestParam Map map) throws Exception{
         return userService.addFriend(email, map);
     }

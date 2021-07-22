@@ -16,6 +16,8 @@ import java.util.Map;
 @Getter
 @NoArgsConstructor
 public class AddRequest {
+    private String email;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 8)
     private UserType userType;
@@ -32,7 +34,8 @@ public class AddRequest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public AddRequest(UserType userType, MatchingType matchingType, Major major, Gender gender){
+    public AddRequest(String email, UserType userType, MatchingType matchingType, Major major, Gender gender){
+        this.email = email;
         this.userType = userType;
         this.matchingType = matchingType;
         this.major = major;
@@ -40,6 +43,7 @@ public class AddRequest {
     }
 
     public AddRequest(Map map){
+        this.email = map.get("email").toString();
         this.userType = UserType.valueOf(map.get("userType").toString());
         this.matchingType = MatchingType.valueOf((map.get("matchingType").toString()));
         this.major = Major.valueOf((map.get("major").toString()));

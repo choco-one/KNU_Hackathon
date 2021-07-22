@@ -8,14 +8,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @Access(AccessType.FIELD)
 public class Matching {
 
-    String id = UUID.randomUUID().toString();
+    private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 8)
@@ -33,10 +32,17 @@ public class Matching {
     @Column(length = 8)
     private Major major;
 
+    private String matchingOption;
+
     public Matching(AddRequest addRequest){
+        this.email = addRequest.getEmail();
         this.userType = addRequest.getUserType();
         this.matchingType = addRequest.getMatchingType();
         this.gender = addRequest.getGender();
         this.major = addRequest.getMajor();
+    }
+
+    public void setMatchingOption(String matchingOption) {
+        this.matchingOption = matchingOption;
     }
 }

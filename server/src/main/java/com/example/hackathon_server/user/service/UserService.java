@@ -62,7 +62,9 @@ public class UserService {
 
         User user = info(email);
 
-        user.getFriend().add(info(map.get("email").toString()));
+        user.getFriend().add(map.get("email").toString());
+
+        System.out.println(user.getFriend().size());
 
         Firestore firestore = FirestoreClient.getFirestore();
 
