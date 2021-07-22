@@ -2,6 +2,9 @@ package com.example.hackathon_server.matching.service;
 
 import com.example.hackathon_server.matching.domain.Matching;
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.user.domain.Gender;
+import com.example.hackathon_server.user.domain.Major;
+import com.example.hackathon_server.user.domain.UserType;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -9,6 +12,8 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MatchingService {
@@ -51,4 +56,19 @@ public class MatchingService {
 
         return "Matching ID: " + id + " deleted";
     }
+
+//    public List<Matching> find(UserType userType, Major major, Gender gender){
+//
+//        if(userType.toString().equals("Freshman")){
+//
+//        }
+//
+//        else if(userType.toString().equals("Senior")){
+//
+//        }
+//
+//        else{
+//
+//        }
+//    }
 }

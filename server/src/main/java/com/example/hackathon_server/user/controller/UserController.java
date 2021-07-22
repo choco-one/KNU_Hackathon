@@ -27,7 +27,7 @@ public class UserController {
         return userService.info(email);
     }
 
-    @PutMapping("/api/user/{email}")
+    @PutMapping(value = "/api/user/{email}", consumes = "application/x-www-form-urlencoded")
     public String update(@PathVariable String email, @RequestParam Map map) throws Exception{
         return userService.update(email, new UpdateRequest(map));
     }

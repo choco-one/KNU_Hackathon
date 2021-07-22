@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @Slf4j
 public class MatchingController {
@@ -15,8 +17,8 @@ public class MatchingController {
     private MatchingService matchingService;
 
     @PostMapping("/api/matching/add")
-    public String join(@RequestBody AddRequest addRequest) throws Exception{
-        return matchingService.add(addRequest);
+    public String join(@RequestParam Map map) throws Exception{
+        return matchingService.add(new AddRequest(map));
     }
 
     @GetMapping("/api/matching/{id}")

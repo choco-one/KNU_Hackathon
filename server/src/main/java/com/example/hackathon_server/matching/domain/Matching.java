@@ -3,6 +3,7 @@ package com.example.hackathon_server.matching.domain;
 import com.example.hackathon_server.matching.dto.AddRequest;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
+import com.example.hackathon_server.user.domain.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,14 @@ public class Matching {
     String id = UUID.randomUUID().toString();
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 8)
+    private UserType userType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 8)
+    private MatchingType matchingType;
+
+    @Enumerated(EnumType.STRING)
     @Column(length=6)
     private Gender gender;
 
@@ -25,6 +34,8 @@ public class Matching {
     private Major major;
 
     public Matching(AddRequest addRequest){
+        this.userType = addRequest.getUserType();
+        this.matchingType = addRequest.getMatchingType();
         this.gender = addRequest.getGender();
         this.major = addRequest.getMajor();
     }
