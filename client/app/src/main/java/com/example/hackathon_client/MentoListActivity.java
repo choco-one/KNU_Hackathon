@@ -26,6 +26,7 @@ public class MentoListActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent a = new Intent(MentoListActivity.this, MainActivity.class);
+                        a.putExtra("usr_id", usr_id_from_login);
                         startActivity(a);
                         break;
                     case R.id.navigation_list:
@@ -39,5 +40,6 @@ public class MentoListActivity extends AppCompatActivity {
                 return false;
             }
         });
+        navigation.getMenu().getItem(1).setChecked(true);
     }
 }

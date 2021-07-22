@@ -39,9 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup_company">
             <RadioButton
-                android:id="@+id/computer"
+                android:id="@+id/public_co"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@drawable/custom_radio_button"
@@ -49,7 +50,7 @@
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838" />
             <RadioButton
-                android:id="@+id/globalSW"
+                android:id="@+id/private_co"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_radio_button"
