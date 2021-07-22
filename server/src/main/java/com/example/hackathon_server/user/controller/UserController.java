@@ -6,7 +6,6 @@ import com.example.hackathon_server.user.dto.UpdateRequest;
 import com.example.hackathon_server.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
