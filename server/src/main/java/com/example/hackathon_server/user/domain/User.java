@@ -37,6 +37,10 @@ public class User {
     @Column(length = 8)
     private Major major;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 9)
+    private Company company;
+
     private String career;
 
     private String interest;
@@ -54,6 +58,7 @@ public class User {
         this.gender = joinRequest.getGender();
         this.userType = joinRequest.getUserType();
         this.major = joinRequest.getMajor();
+        this.company = joinRequest.getCompany();
     }
 
     public void update(UpdateRequest updateRequest){

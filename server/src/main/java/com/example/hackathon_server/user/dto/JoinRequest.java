@@ -1,5 +1,6 @@
 package com.example.hackathon_server.user.dto;
 
+import com.example.hackathon_server.user.domain.Company;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
 import com.example.hackathon_server.user.domain.UserType;
@@ -49,16 +50,9 @@ public class JoinRequest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public JoinRequest(String name, String email, String password, String tel_number, String std_number, UserType userType, Major major, Gender gender){
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.tel_number = tel_number;
-        this.std_number = std_number;
-        this.userType = userType;
-        this.major = major;
-        this.gender = gender;
-    }
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private Company company;
 
     public JoinRequest(Map map){
         this.name = map.get("name").toString();
@@ -69,5 +63,6 @@ public class JoinRequest {
         this.userType = UserType.valueOf(map.get("userType").toString());
         this.major = Major.valueOf(map.get("major").toString());
         this.gender = Gender.valueOf(map.get("gender").toString());
+        this.company = Company.valueOf(map.get("company").toString());
     }
 }
