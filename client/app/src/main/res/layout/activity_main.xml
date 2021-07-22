@@ -11,11 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_mypage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/person" />
         <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
