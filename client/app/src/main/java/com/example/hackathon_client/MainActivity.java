@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MypageActivity.class);
-
                 startActivity(intent);
             }
         });
@@ -67,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_list:
                         Intent a = new Intent(MainActivity.this, MentoListActivity.class);
+                        a.putExtra("usr_id", usr_id_from_login);
                         startActivity(a);
                         break;
                     case R.id.navigation_mypage:
                         Intent b = new Intent(MainActivity.this, MypageActivity.class);
-
                         b.putExtra("usr_id", usr_id_from_login);
                         startActivity(b);
                         break;

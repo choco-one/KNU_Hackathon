@@ -18,6 +18,9 @@ public class MentoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mento_list);
 
+        Intent intent = getIntent();
+        String usr_id_from_login = intent.getStringExtra("usr_id");
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -31,6 +34,7 @@ public class MentoListActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_mypage:
                         Intent b = new Intent(MentoListActivity.this, MypageActivity.class);
+                        b.putExtra("usr_id", usr_id_from_login);
                         startActivity(b);
                         break;
                 }
