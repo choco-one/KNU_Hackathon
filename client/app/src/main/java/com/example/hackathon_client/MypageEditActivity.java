@@ -41,8 +41,6 @@ public class MypageEditActivity extends AppCompatActivity {
         user_phone.setHint(user.tel_number);
         user_career.setHint(user.career);
         user_interest.setHint(user.interest);
-
-
     }
 
 
