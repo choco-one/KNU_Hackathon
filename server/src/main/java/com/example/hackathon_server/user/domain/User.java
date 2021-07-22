@@ -1,6 +1,7 @@
 package com.example.hackathon_server.user.domain;
 
 import com.example.hackathon_server.user.dto.JoinRequest;
+import com.example.hackathon_server.user.dto.UpdateRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -49,11 +50,11 @@ public class User {
         this.major = joinRequest.getMajor();
     }
 
-    public void update(String tel_number, String major, String userType, String career, String interest){
-        this.tel_number = tel_number;
-        this.major = Major.valueOf(major);
-        this.userType = UserType.valueOf(userType);
-        this.career = career;
-        this.interest = interest;
+    public void update(UpdateRequest updateRequest){
+        this.tel_number = updateRequest.getTel_number();
+        this.major = updateRequest.getMajor();
+        this.userType = updateRequest.getUserType();
+        this.career = updateRequest.getCareer();
+        this.interest = updateRequest.getInterest();
     }
 }

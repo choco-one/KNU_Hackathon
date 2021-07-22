@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping("/api/user/{email}")
-    public String update(@PathVariable String email, @RequestBody UpdateRequest updateRequest) throws Exception{
-        return userService.update(email, updateRequest);
+    public String update(@PathVariable String email, @RequestParam Map map) throws Exception{
+        return userService.update(email, new UpdateRequest(map));
     }
 }

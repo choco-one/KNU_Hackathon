@@ -49,7 +49,7 @@ public class UserService {
     public String update(String email, UpdateRequest updateRequest) throws Exception {
 
         User user = info(email);
-        user.update(updateRequest.getTel_number(), updateRequest.getMajor(), updateRequest.getUserType(), updateRequest.getCareer(),updateRequest.getInterest());
+        user.update(updateRequest);
 
         Firestore firestore = FirestoreClient.getFirestore();
 
