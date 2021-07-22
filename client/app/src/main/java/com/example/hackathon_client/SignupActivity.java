@@ -12,18 +12,43 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
+
+    public EditText editTextEmail;
+    public EditText editTextPassword;
+    public EditText editTextName;
+    public EditText editTextPhoneNum;
+    public RadioGroup major;
+    public RadioGroup gender;
+    public RadioGroup state;
+    public String user_type;
+    public String user_gender;
+    public String user_major;
+    public String name;
+    public String email;
+    public String phone;
+    public String password;
+
+    public StringRequest stringRequest;
+
+    public RequestQueue queue;
 
     private static final String TAG = "SignupActivity";
 
@@ -35,6 +60,8 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     private Button btn_signup;
+    String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user/join";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +70,21 @@ public class SignupActivity extends AppCompatActivity {
 
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
+        queue = Volley.newRequestQueue(this);
 
         btn_signup = findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp();
+                try {
+                    signUp();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
+
+        editTextEmail = findViewById(R.id.signup_email);
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -73,66 +107,66 @@ public class SignupActivity extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
     }
 
-    private void signUp(){
+    private void signUp() throws Exception {
 
-        EditText editTextEmail = findViewById(R.id.signup_email);
-        String email = editTextEmail.getText().toString();
+        editTextEmail = findViewById(R.id.signup_email);
+        email = editTextEmail.getText().toString();
 
-        EditText editTextPassword = findViewById(R.id.signup_password);
-        String password = editTextPassword.getText().toString();
+        editTextPassword = findViewById(R.id.signup_password);
+        password = editTextPassword.getText().toString();
 
-        EditText editTextName = findViewById(R.id.signup_name);
-        String name = editTextName.getText().toString();
+        editTextName = findViewById(R.id.signup_name);
+        name = editTextName.getText().toString();
 
-        EditText editTextPhoneNum = findViewById(R.id.signup_phone);
-        String phone = editTextPhoneNum.getText().toString();
+        editTextPhoneNum = findViewById(R.id.signup_phone);
+        phone = editTextPhoneNum.getText().toString();
 
-        RadioGroup major = findViewById(R.id.major);
-        String user_major = getRadio(major);
-        if(user_major == "신입생"){
-            user_major = "FRESHMAN";
-        } else if(user_major == "재학생"){
-            user_major = "SENIOR";
-        } else{
-            user_major = "GRADUATE";
-        }
+        major = findViewById(R.id.major);
 
-        RadioGroup gender = findViewById(R.id.gender);
-        String user_gender = getRadio(gender);
-        if(user_gender == "남자"){
-            user_gender = "MALE";
-        } else{
-            user_gender = "FEMALE";
-        }
+        gender = findViewById(R.id.gender);
 
-        RadioGroup state = findViewById(R.id.state);
-        String user_type = getRadio(state);
-        if(user_type == "심컴"){
-            user_type = "ADVANCED";
-        } else{
-            user_type = "GLOBALSW";
-        }
+        state = findViewById(R.id.state);
 
-        if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("") && !editTextName.getText().toString().equals("")) {
+        if (!email.equals("") && !password.equals("") && !name.equals("")) {
             // 이메일과 비밀번호가 공백이 아닌 경우
-            if(major.getCheckedRadioButtonId() != -1 && gender.getCheckedRadioButtonId() != -1 && major.getCheckedRadioButtonId() != -1 && state.getCheckedRadioButtonId() != -1 ){
+            if(major.getCheckedRadioButtonId() != -1 && gender.getCheckedRadioButtonId() != -1 && state.getCheckedRadioButtonId() != -1 ){
                 //라디오버튼 체크 된 경우
-                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                int selectedId_type = state.getCheckedRadioButtonId();
+                RadioButton radioButton_type = (RadioButton) findViewById(selectedId_type);
+                user_type = radioButton_type.getText().toString();
 
-                JSONObject jsonObject= new JSONObject();
-                try {
-                    jsonObject.put("email", email);
-                    jsonObject.put("password", password);
-                    jsonObject.put("name", name);
-                    jsonObject.put("tel_number", phone);
-                    jsonObject.put("UserType", user_type);
-                    jsonObject.put("Major", user_major);
-                    jsonObject.put("Gender", user_gender);
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                if(user_type.equals("신입생")){
+                    user_type = "FRESHMAN";
+                } else if(user_type.equals("재학생")){
+                    user_type = "SENIOR";
+                } else{
+                    user_type = "GRADUATE";
                 }
+
+                int selectedId_gender = gender.getCheckedRadioButtonId();
+                RadioButton radioButton_gender = (RadioButton) findViewById(selectedId_gender);
+                user_gender = radioButton_gender.getText().toString();
+
+                if(user_gender.equals("남자")){
+                    user_gender = "MALE";
+                } else{
+                    user_gender = "FEMALE";
+                }
+
+                int selectedId_major = major.getCheckedRadioButtonId();
+                RadioButton radioButton_major = (RadioButton) findViewById(selectedId_major);
+                user_major = radioButton_major.getText().toString();
+
+                if(user_major.equals("심컴")){
+                    user_major = "ADVANCED";
+                } else{
+                    user_major = "GLOBALSW";
+                }
+
+                createUser(email, password);
+
             }
+
             else{
                 //라디오버튼 체크 안 된 경우
                 Toast.makeText(SignupActivity.this, "선택을 완료해주세요.", Toast.LENGTH_LONG).show();
@@ -141,14 +175,7 @@ public class SignupActivity extends AppCompatActivity {
             // 이메일과 비밀번호가 공백인 경우
             Toast.makeText(SignupActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
         }
-    }
 
-    //라디오버튼 값 받아오기
-    private String getRadio(RadioGroup guessRadioGroup){
-        int selectedId = guessRadioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) guessRadioGroup.findViewById(selectedId);
-        String s = radioButton.getText().toString();
-        return s;
     }
 
     Intent intent = getIntent();
@@ -165,8 +192,7 @@ public class SignupActivity extends AppCompatActivity {
 
                         Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                         firebaseAuth.addAuthStateListener(firebaseAuthListener);
-
-
+                        push(name, email, password, phone, user_type, user_major, user_gender);
 
                     } else {
                         // 회원가입 실패
@@ -178,10 +204,40 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (firebaseAuthListener != null) {
+        if (firebaseAuthListener != null && queue != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            queue.cancelAll(TAG);
         }
     }
 
+    void push(String name, String email, String password, String phone, String user_type, String user_major, String user_gender){
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(SignupActivity.this, response, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", name);
+                params.put("email", email);
+                params.put("password", password);
+                params.put("tel_number", phone);
+                params.put("userType", user_type);
+                params.put("major", user_major);
+                params.put("gender", user_gender);
+                return params;
+            }
+        };
+        stringRequest.setTag(TAG);
+
+        queue.add(stringRequest);
+    }
 
 }
