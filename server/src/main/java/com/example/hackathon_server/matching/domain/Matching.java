@@ -1,6 +1,7 @@
 package com.example.hackathon_server.matching.domain;
 
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.matching.dto.GAddRequest;
 import com.example.hackathon_server.user.domain.Company;
 import com.example.hackathon_server.user.domain.Gender;
 import com.example.hackathon_server.user.domain.Major;
@@ -49,6 +50,15 @@ public class Matching {
         this.gender = addRequest.getGender();
         this.major = addRequest.getMajor();
         this.company = addRequest.getCompany();
+    }
+
+    public Matching(GAddRequest gaddRequest){
+        this.email = gaddRequest.getEmail();
+        this.userType = gaddRequest.getUserType();
+        this.matchingType = gaddRequest.getMatchingType();
+        this.gender = gaddRequest.getGender();
+        this.major = gaddRequest.getMajor();
+        this.company = gaddRequest.getCompany();
     }
 
     public void setMatchingOption(String matchingOption) {

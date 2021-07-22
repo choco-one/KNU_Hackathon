@@ -2,6 +2,7 @@ package com.example.hackathon_server.matching.service;
 
 import com.example.hackathon_server.matching.domain.Matching;
 import com.example.hackathon_server.matching.dto.AddRequest;
+import com.example.hackathon_server.matching.dto.GAddRequest;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -78,8 +79,8 @@ public class MatchingService {
         return apiFuture.get().getUpdateTime().toString();
     }
 
-    public String gadd(AddRequest addRequest) throws Exception {
-        Matching matching = new Matching(addRequest);
+    public String gadd(GAddRequest gaddRequest) throws Exception {
+        Matching matching = new Matching(gaddRequest);
 
         Firestore firestore = FirestoreClient.getFirestore();
         CollectionReference collection = firestore.collection("GD_MATCHING");
@@ -87,20 +88,20 @@ public class MatchingService {
         Iterator<DocumentReference> documents = null;
         documents = collection.listDocuments().iterator();
 
-        if(addRequest.getMatchingType().toString().equals("GRADUATE")){
-            if(addRequest.getUserType().toString().equals("GRADUATE")){
-                if(addRequest.getCompany().toString().equals("PUBLICCO")){
+        if(gaddRequest.getMatchingType().toString().equals("GRADUATE")){
+            if(gaddRequest.getUserType().toString().equals("GRADUATE")){
+                if(gaddRequest.getCompany().toString().equals("PUBLICCO")){
                     matching.setMatchingOption("1");
                 }
-                else if(addRequest.getMajor().toString().equals("PRIVATECO")){
+                else if(gaddRequest.getMajor().toString().equals("PRIVATECO")){
                     matching.setMatchingOption("2");
                 }
             }
             else {
-                if(addRequest.getMajor().toString().equals("PUBLICCO")){
+                if(gaddRequest.getMajor().toString().equals("PUBLICCO")){
                     matching.setMatchingOption("4");
                 }
-                else if(addRequest.getMajor().toString().equals("PRIVATECO")){
+                else if(gaddRequest.getMajor().toString().equals("PRIVATECO")){
                     matching.setMatchingOption("3");
                 }
             }
