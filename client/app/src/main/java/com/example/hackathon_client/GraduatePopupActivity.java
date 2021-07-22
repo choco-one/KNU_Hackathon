@@ -7,34 +7,24 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
-public class UserTypePopupActivity extends Activity {
+public class GraduatePopupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_usertype_popup);
+        setContentView(R.layout.activity_graduate_popup);
     }
 
-    public void mOnClickStudent(View v){
+    //확인 버튼 클릭
+    public void mOnClose(View v){
         //데이터 전달하기
         Intent intent = new Intent();
-        intent.putExtra("result", "Student");
+        intent.putExtra("result", "Close Popup");
         setResult(RESULT_OK, intent);
-        finish();
-        Intent intent2 = new Intent(UserTypePopupActivity.this, MatchingPopupActivity.class);
-        startActivityForResult(intent2, 1);
-    }
 
-    public void mOnClickGraduate(View v){
-        //데이터 전달하기
-        Intent intent = new Intent();
-        intent.putExtra("result", "Graduate");
-        setResult(RESULT_OK, intent);
         //액티비티(팝업) 닫기
         finish();
-        Intent intent2 = new Intent(UserTypePopupActivity.this, GraduatePopupActivity.class);
-        startActivityForResult(intent2, 1);
     }
 
     @Override
