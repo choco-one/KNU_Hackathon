@@ -272,6 +272,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
+                                android:hint=""
                                 android:textColor="@color/black"
                                 android:textColorHint="#888888"
                                 android:textSize="15dp" />
@@ -295,6 +296,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
+                                android:hint=""
                                 android:textColor="@color/black"
                                 android:textColorHint="#888888"
                                 android:textSize="15dp" />

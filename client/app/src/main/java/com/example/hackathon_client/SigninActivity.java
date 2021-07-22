@@ -60,8 +60,6 @@ public class SigninActivity extends AppCompatActivity {
                 usr_password = et_password.getText().toString();
 
                 if (!usr_id.equals("") && !usr_password.equals("")) {
-
-
                     loginUser(usr_id, usr_password);
                 } else {
                     Toast.makeText(SigninActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();

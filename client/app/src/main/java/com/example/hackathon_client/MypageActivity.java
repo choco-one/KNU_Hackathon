@@ -72,9 +72,9 @@ public class MypageActivity extends AppCompatActivity {
                 user = gson.fromJson(response, User.class);
 
                 if(user.major.equals("ADVANCED")){
-                        user.major = "심화컴퓨터공학과";
+                        user.major = "심화컴퓨터공학";
                 } else{
-                    user.major = "글로벌소프트웨어학과";
+                    user.major = "글로벌SW융합";
                 }
 
                 if(user.gender.equals("FEMALE")){

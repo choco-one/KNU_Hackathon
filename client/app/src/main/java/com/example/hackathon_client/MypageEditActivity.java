@@ -12,20 +12,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MypageEditActivity extends AppCompatActivity {
 
-    private RequestQueue queue;
-    private static final String TAG = "MYPAGE_EDIT";
+    public RequestQueue queue;
+    public String TAG = "MYPAGE_EDIT";
     public TextView user_email;
     public TextView user_name;
     public TextView user_gender;
@@ -46,16 +46,16 @@ public class MypageEditActivity extends AppCompatActivity {
     public String url;
     public StringRequest stringRequest;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_edit);
 
+        queue = Volley.newRequestQueue(this);
+
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
-        url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user"+user.email;
+        url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user/"+user.email;
 
         user_email = findViewById(R.id.user_email);
         user_name = findViewById(R.id.user_name);
@@ -74,7 +74,7 @@ public class MypageEditActivity extends AppCompatActivity {
         senior = findViewById(R.id.student);
         graduate = findViewById(R.id.graduate);
 
-        if(user.major.equals("심화컴퓨터공학과")){
+        if(user.major.equals("심화컴퓨터공학")){
             simcom.setChecked(true);
         } else{
             global.setChecked(true);
@@ -110,6 +110,22 @@ public class MypageEditActivity extends AppCompatActivity {
                         user.major = "GLOBALSW";
                     }
 
+                    if (user_phone.getText().toString().equals("")) {
+                        user.tel_number = user_phone.getHint().toString();
+                    } else {
+                        user.tel_number = user_phone.getText().toString();
+                    }
+                    if (user_interest.getText().toString().equals("")) {
+                        user.interest = user_interest.getHint().toString();
+                    } else {
+                        user.interest = user_interest.getText().toString();
+                    }
+                    if (user_career.getText().toString().equals("")) {
+                        user.career = user_career.getHint().toString();
+                    } else {
+                        user.career = user_career.getText().toString();
+                    }
+
                     int selectedId_type = type.getCheckedRadioButtonId();
                     RadioButton radioButton_type = (RadioButton) findViewById(selectedId_type);
                     user.userType = radioButton_type.getText().toString();
@@ -122,51 +138,53 @@ public class MypageEditActivity extends AppCompatActivity {
                         user.userType = "GRADUATE";
                     }
 
-                    user.career = user_career.getText().toString();
-                    user.interest = user_interest.getText().toString();
+                    System.out.println(user.tel_number+user.major+user.userType+user.career+user.interest);
 
-                    push_mypage(user_phone.getText().toString(),user.major, user.userType, user.career, user.interest);
 
-                    Intent intent = new Intent(MypageEditActivity.this, MypageActivity.class);
-                    startActivity(intent);
-                    finish();
+                    stringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(MypageEditActivity.this, response, Toast.LENGTH_LONG).show();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("tel_number", user.tel_number);
+                            params.put("userType", user.userType);
+                            params.put("major", user.major);
+                            params.put("career", user.career);
+                            params.put("interest", user.interest);
+
+                            return params;
+                        }
+                    };
+                    stringRequest.setTag(TAG);
+                    //stringRequest.setShouldCache(false);
+                    queue.add(stringRequest);
+
+                    Intent c = new Intent(MypageEditActivity.this, MypageActivity.class);
+                    c.putExtra("usr_id", user.email);
+                    c.putExtra("user", user);
+                    startActivity(c);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-
     }
 
-    void push_mypage(String phone, String user_major, String user_type, String user_career, String user_interest){
-        stringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(MypageEditActivity.this, response, Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tel_number", phone);
-                params.put("userType", user_type);
-                params.put("major", user_major);
-                params.put("career", user_career);
-                params.put("interest", user_interest);
-
-                return params;
-            }
-        };
-        stringRequest.setTag(TAG);
-
-        queue.add(stringRequest);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (queue != null) {
+            queue.cancelAll(TAG);
+        }
     }
-
-
 }
