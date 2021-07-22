@@ -18,6 +18,7 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".ChatActivity" />
         <activity android:name=".MypageActivity"/>
+        <activity android:name=".MentoListActivity"/>
 
         <activity
             android:name=".SplashActivity"
