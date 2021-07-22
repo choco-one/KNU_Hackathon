@@ -3,17 +3,12 @@
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/yangjin"/>
+        android:font = "@font/yangjin">
+    </font>
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font="@font/gbold"/>
-    <font
-        android:fontStyle = "normal"
-        android:fontWeight = "400"
-        android:font="@font/glight"/>
-    <font
-        android:fontStyle = "normal"
-        android:fontWeight = "400"
-        android:font="@font/gmedium"/>
+        android:font="@font/gbold">
+    </font>
+
 </font-family>

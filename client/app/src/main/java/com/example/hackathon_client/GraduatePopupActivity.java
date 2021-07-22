@@ -6,35 +6,36 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-public class UserTypePopupActivity extends Activity {
+public class GraduatePopupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_usertype_popup);
+        setContentView(R.layout.activity_graduate_popup);
     }
 
-    public void mOnClickStudent(View v){
-        //데이터 전달하기
-        Intent intent = new Intent();
-        intent.putExtra("result", "Student");
-        setResult(RESULT_OK, intent);
-        finish();
-        Intent intent2 = new Intent(UserTypePopupActivity.this, MatchingPopupActivity.class);
-        startActivityForResult(intent2, 1);
-    }
+    //확인 버튼 클릭
+    public void mOnClose(View v){
+        final RadioGroup rg_company = (RadioGroup) findViewById(R.id.radioGroup_company);
+        RadioButton rb_company = (RadioButton) findViewById(rg_company.getCheckedRadioButtonId());
+        String selected_company = (String) rb_company.getText();
 
-    public void mOnClickGraduate(View v){
+        if(selected_company.equals("공기업")){
+            selected_company = "PUBLICCO";
+        } else{
+            selected_company = "PRIVATECO";
+        }
         //데이터 전달하기
         Intent intent = new Intent();
-        intent.putExtra("result", "Graduate");
+        intent.putExtra("result", "Close Popup");
         setResult(RESULT_OK, intent);
+
         //액티비티(팝업) 닫기
         finish();
-        Intent intent2 = new Intent(UserTypePopupActivity.this, GraduatePopupActivity.class);
-        startActivityForResult(intent2, 1);
     }
 
     @Override

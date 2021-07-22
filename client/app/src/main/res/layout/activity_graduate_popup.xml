@@ -28,10 +28,10 @@
         <TextView
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="전공"
+            android:text="직종"
             android:textStyle="bold"
             android:textColor="#DC8181"
             android:textSize="16dp" />
@@ -40,23 +40,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:id="@+id/radioGroup_major">
+            android:id="@+id/radioGroup_company">
             <RadioButton
-                android:id="@+id/computer"
+                android:id="@+id/public_co"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@drawable/custom_radio_button"
-                android:text="  심컴"
+                android:text="  공기업"
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838" />
             <RadioButton
-                android:id="@+id/globalSW"
+                android:id="@+id/private_co"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_radio_button"
                 android:textColor="#3D3838"
                 android:layout_marginRight="15dp"
-                android:text="  글솝" />
+                android:text="  사기업" />
             <RadioButton
                 android:id="@+id/any_major"
                 android:layout_width="wrap_content"
@@ -66,57 +66,6 @@
                 android:text="  상관 없음" />
         </RadioGroup>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:text="성별"
-            android:textSize="16dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#DC8181"
-            />
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:id="@+id/radioGroup_gender">
-
-            <RadioButton
-                android:id="@+id/man"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/custom_radio_button"
-                android:layout_marginRight="15dp"
-                android:textColor="#3D3838"
-                android:text="  남자" />
-
-            <RadioButton
-                android:id="@+id/woman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/custom_radio_button"
-                android:layout_marginRight="15dp"
-                android:textColor="#3D3838"
-                android:text="  여자" />
-            <RadioButton
-                android:id="@+id/any_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/custom_radio_button"
-                android:textColor="#3D3838"
-                android:text="  상관 없음" />
-        </RadioGroup>
-    </LinearLayout>
-
-
 
 
     <LinearLayout

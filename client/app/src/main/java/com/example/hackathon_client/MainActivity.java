@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -23,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,17 +65,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        String usr_id_from_login = intent.getStringExtra("usr_id");
 
-        btn_mypage = findViewById(R.id.btn_mypage);
-
-        btn_mypage.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                startActivity(intent);
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        break;
+                    case R.id.navigation_list:
+                        Intent a = new Intent(MainActivity.this, MentoListActivity.class);
+                        a.putExtra("usr_id", usr_id_from_login);
+                        startActivity(a);
+                        break;
+                    case R.id.navigation_mypage:
+                        Intent b = new Intent(MainActivity.this, MypageActivity.class);
+                        b.putExtra("usr_id", usr_id_from_login);
+                        startActivity(b);
+                        break;
+                }
+                return false;
             }
         });
+        navigation.getMenu().getItem(0).setChecked(true);
 
         bindGrid();
     }
