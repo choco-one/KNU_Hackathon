@@ -12,10 +12,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
 public class AddRequest {
+    String id = UUID.randomUUID().toString();
+
     private String email;
 
     @Enumerated(EnumType.STRING)
