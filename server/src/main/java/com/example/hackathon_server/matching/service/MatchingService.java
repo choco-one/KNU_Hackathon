@@ -118,7 +118,7 @@ public class MatchingService {
                 return matching.getEmail() + " " + matching_db.getEmail();
             }
         }
-        ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(matching.getId()).set(matching);
+        ApiFuture<WriteResult> apiFuture = firestore.collection("GD_MATCHING").document(matching.getId()).set(matching);
         return apiFuture.get().getUpdateTime().toString();
     }
 
@@ -139,11 +139,37 @@ public class MatchingService {
         }
     }
 
+    public Matching ginfo(String id) throws Exception{
+        Firestore firestore = FirestoreClient.getFirestore();
+
+        DocumentReference documentReference = firestore.collection("GD_MATCHING").document(id);
+
+        ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
+
+        DocumentSnapshot documentSnapshot = apiFuture.get();
+
+        if(documentSnapshot.exists()){
+            return documentSnapshot.toObject(Matching.class);
+        }
+        else {
+            return null;
+        }
+    }
+
     public String delete(String id) throws Exception{
 
         Firestore firestore = FirestoreClient.getFirestore();
 
         ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(id).delete();
+
+        return "Matching ID: " + id + " deleted";
+    }
+
+    public String gdelete(String id) throws Exception{
+
+        Firestore firestore = FirestoreClient.getFirestore();
+
+        ApiFuture<WriteResult> apiFuture = firestore.collection("GD_MATCHING").document(id).delete();
 
         return "Matching ID: " + id + " deleted";
     }
