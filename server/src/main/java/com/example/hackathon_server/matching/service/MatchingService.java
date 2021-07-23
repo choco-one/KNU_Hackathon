@@ -98,10 +98,10 @@ public class MatchingService {
                 }
             }
             else {
-                if(gaddRequest.getMajor().toString().equals("PUBLICCO")){
+                if(gaddRequest.getCompany().toString().equals("PUBLICCO")){
                     matching.setMatchingOption("4");
                 }
-                else if(gaddRequest.getMajor().toString().equals("PRIVATECO")){
+                else if(gaddRequest.getCompany().toString().equals("PRIVATECO")){
                     matching.setMatchingOption("3");
                 }
             }
