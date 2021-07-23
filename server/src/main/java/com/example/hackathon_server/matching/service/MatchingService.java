@@ -76,7 +76,7 @@ public class MatchingService {
             }
         }
         ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(matching.getId()).set(matching);
-        return apiFuture.get().getUpdateTime().toString();
+        return null;
     }
 
     public String gadd(GAddRequest gaddRequest) throws Exception {
@@ -119,7 +119,7 @@ public class MatchingService {
             }
         }
         ApiFuture<WriteResult> apiFuture = firestore.collection("GD_MATCHING").document(matching.getId()).set(matching);
-        return apiFuture.get().getUpdateTime().toString();
+        return null;
     }
 
     public Matching info(String id) throws Exception{
