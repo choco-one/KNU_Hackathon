@@ -26,7 +26,7 @@ public class MentoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mento_list);
 
-        rv = (RecyclerView) findViewById(R.id.main_rv);
+
         llm = new LinearLayoutManager(this);
 
         count = new ArrayList<>();
