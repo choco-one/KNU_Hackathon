@@ -129,7 +129,7 @@ public class ChatActivity extends AppCompatActivity {
         stEmail = getIntent().getStringExtra("usr_id");
         roomUid = getIntent().getStringExtra("room_uid");
 
-        DatabaseReference getRef = database.getReference("Room").child("chatRoom").child(roomUid).child("message");
+        DatabaseReference getRef = database.getReference("Room").child(roomUid).child("message");
         getRef.addChildEventListener(childEventListener);
 
 
@@ -143,7 +143,7 @@ public class ChatActivity extends AppCompatActivity {
                 SimpleDateFormat dataformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String datatime = dataformat.format(c.getTime());
 
-                DatabaseReference myRef = database.getReference("Room").child("chatRoom").child(roomUid).child("message").child(datatime);
+                DatabaseReference myRef = database.getReference("Room").child(roomUid).child("message").child(datatime);
 
                 Hashtable<String, String> values = new Hashtable<String, String>();
                 values.put("email", stEmail);
