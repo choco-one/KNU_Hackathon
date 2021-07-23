@@ -8,15 +8,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="13dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/tvChat"
-        android:background="@drawable/chat_bubble"
+        android:background="@drawable/theme_chatroom_bubble_me_02_image"
         android:padding="10dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

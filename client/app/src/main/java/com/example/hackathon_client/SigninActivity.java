@@ -101,11 +101,11 @@ public class SigninActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // 로그인 성공
-                        Toast.makeText(SigninActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+
                         firebaseAuth.addAuthStateListener(firebaseAuthListener);
                     } else {
                         // 로그인 실패
-                        Toast.makeText(SigninActivity.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SigninActivity.this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

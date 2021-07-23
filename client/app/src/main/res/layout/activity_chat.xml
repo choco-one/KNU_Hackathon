@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff7e9"
     tools:context=".ChatActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/chat_title"
+        android:gravity="center"
+        android:layout_height="40dp"
+        android:textColor="@color/black"
+        android:background="#F1D9D1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="logout"
+        android:layout_height="40dp"
+        android:text="나가기"
         android:id="@+id/btnFinish"
+        android:background="@drawable/edge3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
@@ -28,19 +39,22 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/edge3"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="send"
+        android:text="전송 "
         android:id="@+id/btnSend"
         />
 
     <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSend"
+        android:background="#F1D9D1"
         android:id="@+id/etText"
         />
 

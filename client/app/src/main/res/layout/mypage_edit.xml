@@ -266,13 +266,14 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="18dp" />
+
                             <EditText
                                 android:id="@+id/user_career"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
-                                android:hint=""
+                                android:hint="입력하세요"
                                 android:textColor="@color/black"
                                 android:textColorHint="#888888"
                                 android:textSize="15dp" />
@@ -296,7 +297,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
-                                android:hint=""
+                                android:hint="입력하세요"
                                 android:textColor="@color/black"
                                 android:textColorHint="#888888"
                                 android:textSize="15dp" />

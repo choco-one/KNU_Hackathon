@@ -27,11 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Hashtable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -41,21 +38,25 @@ public class SignupActivity extends AppCompatActivity {
     public EditText editTextPassword;
     public EditText editTextName;
     public EditText editTextPhoneNum;
+    public EditText editTextStd_num;
+
     public RadioGroup major;
     public RadioGroup gender;
     public RadioGroup state;
+    public RadioGroup company;
+
     public String user_type;
     public String user_gender;
     public String user_major;
+    public String user_company;
     public String name;
     public String email;
     public String phone;
     public String password;
+    public String std_num;
 
     public StringRequest stringRequest;
-
     public RequestQueue queue;
-
     private static final String TAG = "SignupActivity";
 
     // 비밀번호 정규식
@@ -129,15 +130,20 @@ public class SignupActivity extends AppCompatActivity {
         editTextPhoneNum = findViewById(R.id.signup_phone);
         phone = editTextPhoneNum.getText().toString();
 
+        editTextStd_num = findViewById(R.id.signup_stdnum);
+        std_num = editTextStd_num.getText().toString();
+
         major = findViewById(R.id.major);
 
         gender = findViewById(R.id.gender);
 
         state = findViewById(R.id.state);
 
-        if (!email.equals("") && !password.equals("") && !name.equals("")) {
+        company = findViewById(R.id.radioGroup_company);
+
+        if (!email.equals("") && !password.equals("") && !name.equals("") && !std_num.equals("")) {
             // 이메일과 비밀번호가 공백이 아닌 경우
-            if(major.getCheckedRadioButtonId() != -1 && gender.getCheckedRadioButtonId() != -1 && state.getCheckedRadioButtonId() != -1 ){
+            if(major.getCheckedRadioButtonId() != -1 && gender.getCheckedRadioButtonId() != -1 && state.getCheckedRadioButtonId() != -1 && company.getCheckedRadioButtonId() != -1){
                 //라디오버튼 체크 된 경우
                 int selectedId_type = state.getCheckedRadioButtonId();
                 RadioButton radioButton_type = (RadioButton) findViewById(selectedId_type);
@@ -171,6 +177,19 @@ public class SignupActivity extends AppCompatActivity {
                     user_major = "GLOBALSW";
                 }
 
+                int selectedId_company = company.getCheckedRadioButtonId();
+                RadioButton radioButton_company = (RadioButton) findViewById(selectedId_company);
+                user_company = radioButton_company.getText().toString();
+
+                if(user_company.equals("공기업")){
+                    user_company = "PUBLICCO";
+                } else if(user_company.equals("없음")){
+                    user_company = "NOJOB";
+                }
+                else{
+                    user_company = "PRIVATECO";
+                }
+
                 createUser(email, password);
 
             }
@@ -197,7 +216,6 @@ public class SignupActivity extends AppCompatActivity {
                         // 회원가입 성공
 
                         // real time database에 유저 정보 저장...
-
                         FirebaseUser user = firebaseAuth.getCurrentUser();
 
                         // user information save
@@ -210,11 +228,32 @@ public class SignupActivity extends AppCompatActivity {
 
                         myRef.setValue(values);
 
-                        //이메일 인증 구현해야함
+                        //이메일 인증
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    FirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(SignupActivity.this, SigninActivity.class));
 
-                        Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
-                        firebaseAuth.addAuthStateListener(firebaseAuthListener);
-                        push(name, email, password, phone, user_type, user_major, user_gender);
+                                    Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
+                                    firebaseAuth.addAuthStateListener(firebaseAuthListener);
+                                    finish();
+
+                                } else
+                                {
+                                    // email not sent, so display message and restart the activity or do whatever you wish to do
+
+                                    //restart this activity
+                                    overridePendingTransition(0, 0);
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            }
+                        });
+
+                        push(name, email, password, std_num, phone, user_type, user_major, user_gender, user_company);
+                        finish();
 
                     } else {
                         // 회원가입 실패
@@ -232,7 +271,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    void push(String name, String email, String password, String phone, String user_type, String user_major, String user_gender){
+    void push(String name, String email, String password, String std_num, String phone, String user_type, String user_major, String user_gender, String user_company){
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -252,8 +291,10 @@ public class SignupActivity extends AppCompatActivity {
                 params.put("password", password);
                 params.put("tel_number", phone);
                 params.put("userType", user_type);
+                params.put("std_number", std_num);
                 params.put("major", user_major);
                 params.put("gender", user_gender);
+                params.put("company", user_company);
                 return params;
             }
         };
