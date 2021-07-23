@@ -72,7 +72,7 @@ public class MatchingService {
 
             if((Integer.parseInt(matching.getMatchingOption()) + Integer.parseInt(matching_db.getMatchingOption()) == 9)){
                 delete(matching_db.getId());
-                return matching.getUid() + matching_db.getUid();
+                return matching.getUid() + " " + matching_db.getUid();
             }
         }
         ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(matching.getId()).set(matching);
@@ -115,7 +115,7 @@ public class MatchingService {
 
             if((Integer.parseInt(matching.getMatchingOption()) + Integer.parseInt(matching_db.getMatchingOption()) == 5)){
                 gdelete(matching_db.getId());
-                return matching.getUid() + matching_db.getUid();
+                return matching.getUid() + " " +matching_db.getUid();
             }
         }
         ApiFuture<WriteResult> apiFuture = firestore.collection("GD_MATCHING").document(matching.getId()).set(matching);
