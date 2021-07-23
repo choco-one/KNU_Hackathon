@@ -46,6 +46,7 @@ public class Matching {
     private String matchingOption;
 
     public Matching(AddRequest addRequest){
+        this.uid = addRequest.getUid();
         this.email = addRequest.getEmail();
         this.userType = addRequest.getUserType();
         this.matchingType = addRequest.getMatchingType();
@@ -55,6 +56,7 @@ public class Matching {
     }
 
     public Matching(GAddRequest gaddRequest){
+        this.uid = gaddRequest.getUid();
         this.email = gaddRequest.getEmail();
         this.userType = gaddRequest.getUserType();
         this.matchingType = gaddRequest.getMatchingType();
