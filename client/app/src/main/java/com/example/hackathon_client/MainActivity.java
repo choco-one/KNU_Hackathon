@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
     public String fromMatching;
     Intent intent = getIntent();
 
-
-
     int count;
 
     String stEmail;
@@ -86,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
-
-        fromMatching = intent.getStringExtra("matching_response");
 
         queue = Volley.newRequestQueue(this);
         String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user/" + usr_id_from_login;
@@ -249,7 +245,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
                 stEmail = getIntent().getStringExtra("usr_id");
+                fromMatching = intent.getStringExtra("matching_response");
                 position = a_position+1;
+
+                System.out.println("real code :     " + fromMatching);
+
+
 
                 roomUid = mAuth.getCurrentUser().getUid() + position + "uiIsSbywnnMJ6xFqeB6FhSULAdw2";
                 DatabaseReference ref = chatRoomdatabase.getReference("Room").child(roomUid);
@@ -309,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         roomnumberList.add(postSnapshot.getValue().toString());
-                        System.out.println("Room Number List in in in in in in in" + roomnumberList);
                         callRoomnumber(roomnumberList);
                     }
                 }
@@ -320,45 +320,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-//            roomnumber.addChildEventListener(new ChildEventListener() {
-//                @Override
-//                public void onChildAdded(@NonNull DataSnapshot snapshot, String previousChildName) {
-//                    Position position1 = snapshot.getValue(Position.class);
-//                    String num = position1.getRoomNum();
-//                    roomTypeList.add(num);
-//                    System.out.println("Room type List!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + num);
-//                }
-//
-//                @Override
-//                public void onChildChanged(@NonNull DataSnapshot snapshot, String previousChildName) {
-//
-//                }
-//
-//                @Override
-//                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//                }
-//
-//                @Override
-//                public void onChildMoved(@NonNull DataSnapshot snapshot, String previousChildName) {
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-
-//            System.out.println(roomTypeList.get(0));
-
         }
     }
 
     public void callRoomnumber (ArrayList<String> roomnumberList){
         for (int i = 0; i < roomnumberList.size(); i++) {
-
-            System.out.println("Room Number List out out out out out out out out " + roomnumberList.get(i));
 
             DatabaseReference ref = chatRoomdatabase.getReference("Room").child(roomUid);
             HashMap<String, String> temp = new HashMap<>();
@@ -388,7 +354,6 @@ public class MainActivity extends AppCompatActivity {
                 itemList.add(new GridItem(R.drawable.loading, "mentee"));
                 mGridAdapter.notifyDataSetChanged();
             } else {
-                System.out.println("adhskfhjsdklfjdskasfsdfsdfdsfasfasdf");
                 itemList.add(new GridItem(R.drawable.mortarboard, "mentee"));
                 mGridAdapter.notifyDataSetChanged();
             }
