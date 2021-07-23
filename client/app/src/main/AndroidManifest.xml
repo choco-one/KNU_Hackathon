@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hackathon_client">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:label="랜드멘토"
         android:allowBackup="true"
         android:icon="@drawable/appimg"
+        android:label="랜드멘토"
         android:roundIcon="@drawable/appimg"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        <activity android:name=".SigninActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SignupActivity"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".No_one"></activity>
+        <activity android:name=".SigninActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SignupActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".MypageActivity"/>
-        <activity android:name=".MypageEditActivity"/>
-        <activity android:name=".MentoListActivity"/>
-
+        <activity android:name=".MypageActivity" />
+        <activity android:name=".MypageEditActivity" />
+        <activity android:name=".MentoListActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserTypePopupActivity" android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".MatchingPopupActivity" android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".GraduatePopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".UserTypePopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".MatchingPopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".GraduatePopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>
