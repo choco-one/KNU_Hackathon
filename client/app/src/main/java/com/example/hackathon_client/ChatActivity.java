@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,16 +22,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 
-public class ChatActivity extends AppCompatActivity {
+public class
+
+ChatActivity extends AppCompatActivity {
 
     private static final String TAG = "ChatActivity";
     private RecyclerView recyclerView;
     CustomAdapter mAdapter;
+    public TextView chat_title;
+    public String check_gender;
+    public String check_major;
+
     private RecyclerView.LayoutManager layoutManager;
     EditText etText;
     Button btnSend;
     String stEmail;
     String roomUid;
+    String user_type;
     FirebaseDatabase database;
     ArrayList<Chat> chatArrayList;
 
@@ -41,9 +48,16 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         database = FirebaseDatabase.getInstance();
 
+        chat_title = findViewById(R.id.chat_title);
+        check_gender = getIntent().getStringExtra("check_gender");
+        check_major = getIntent().getStringExtra("check_major");
+
+        //chat_title.setText(check_major + " " + check_gender);
+
         chatArrayList = new ArrayList<>();
         stEmail = getIntent().getStringExtra("usr_id");
         roomUid = getIntent().getStringExtra("room_uid");
+        user_type = getIntent().getStringExtra("usr_type");
 
         Button btnfinish = (Button) findViewById(R.id.btnFinish);
         btnfinish.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +136,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "postComments:onCancelled", databaseError.toException());
-                Toast.makeText(ChatActivity.this, "Failed to load comments.",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ChatActivity.this, "Failed to load comments.",
+                        //Toast.LENGTH_SHORT).show();
             }
         };
         stEmail = getIntent().getStringExtra("usr_id");
@@ -137,7 +151,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stText = etText.getText().toString();
-                Toast.makeText(ChatActivity.this, "MSG : " + stText, Toast.LENGTH_LONG).show();
+                etText.setText("");
+                //Toast.makeText(ChatActivity.this, "MSG : " + stText, Toast.LENGTH_LONG).show();
 
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat dataformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

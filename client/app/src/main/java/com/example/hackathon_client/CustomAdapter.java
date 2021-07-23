@@ -78,7 +78,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+
         viewHolder.getTextView().setText(localDataSet.get(position).getText());
+        viewHolder.getTextView().setBackground(viewHolder.getTextView().getContext().getResources().getDrawable((R.drawable.theme_chatroom_bubble_me_02_image)));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

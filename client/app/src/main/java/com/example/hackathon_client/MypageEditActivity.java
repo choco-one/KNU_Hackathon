@@ -29,6 +29,7 @@ public class MypageEditActivity extends AppCompatActivity {
     public TextView user_email;
     public TextView user_name;
     public TextView user_gender;
+    public TextView user_stdnum;
 
     public EditText user_phone;
     public RadioGroup major;
@@ -37,6 +38,7 @@ public class MypageEditActivity extends AppCompatActivity {
     public EditText user_interest;
 
     public Button edit_ok;
+
     public RadioButton simcom;
     public RadioButton global;
     public RadioButton fresh;
@@ -45,6 +47,8 @@ public class MypageEditActivity extends AppCompatActivity {
 
     public String url;
     public StringRequest stringRequest;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,8 @@ public class MypageEditActivity extends AppCompatActivity {
         user_career = findViewById(R.id.user_career);
         user_interest = findViewById(R.id.user_interest);
         edit_ok = findViewById(R.id.editOK_btn);
+
+        user_stdnum = findViewById(R.id.user_stdnum);
 
         major = findViewById(R.id.major);
         type = findViewById(R.id.type);
@@ -91,10 +97,16 @@ public class MypageEditActivity extends AppCompatActivity {
         user_email.setText(user.email);
         user_name.setText(user.name);
         user_gender.setText(user.gender);
+        user_stdnum.setText(user.std_number);
 
         user_phone.setHint(user.tel_number);
-        user_career.setHint(user.career);
-        user_interest.setHint(user.interest);
+
+        if(user.career!=null){
+            user_career.setHint(user.career);
+        }
+        if(user.interest!=null){
+            user_interest.setHint(user.interest);
+        }
 
         edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,12 +184,14 @@ public class MypageEditActivity extends AppCompatActivity {
                     c.putExtra("usr_id", user.email);
                     c.putExtra("user", user);
                     startActivity(c);
+                    finish();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
     }
 
     @Override
