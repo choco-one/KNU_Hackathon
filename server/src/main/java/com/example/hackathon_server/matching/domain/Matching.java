@@ -19,6 +19,8 @@ public class Matching {
 
     String id = UUID.randomUUID().toString();
 
+    String uid;
+
     private String email;
 
     @Enumerated(EnumType.STRING)

@@ -20,6 +20,8 @@ import java.util.UUID;
 public class GAddRequest {
     String id = UUID.randomUUID().toString();
 
+    String uid;
+
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -43,6 +45,7 @@ public class GAddRequest {
     private Company company;
 
     public GAddRequest(Map map){
+        this.uid = map.get("uid").toString();
         this.email = map.get("email").toString();
         this.userType = UserType.valueOf(map.get("userType").toString());
         this.matchingType = MatchingType.valueOf((map.get("matchingType").toString()));
