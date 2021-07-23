@@ -221,9 +221,10 @@ public class SignupActivity extends AppCompatActivity {
                         // user information save
                         DatabaseReference myRef = database.getReference("users").child(user.getUid());
 
-                        Hashtable<String, String> values = new Hashtable<String, String>();
+                        Hashtable<String, Object> values = new Hashtable<String, Object>();
                         values.put("email", user.getEmail());
                         values.put("Uid", user.getUid());
+                        values.put("count", 0);
 
                         myRef.setValue(values);
 

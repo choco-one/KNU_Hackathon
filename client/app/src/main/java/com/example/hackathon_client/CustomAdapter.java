@@ -13,6 +13,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     private ArrayList<Chat> localDataSet;
     String stMyEmail = "";
+    String stMyRoomUid = "";
 
     /**
      * Provide a reference to the type of views that you are using

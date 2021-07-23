@@ -2,6 +2,7 @@ package com.example.hackathon_client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -25,21 +26,39 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import static java.sql.Types.NULL;
+
 public class MainActivity extends AppCompatActivity {
     List<GridItem> itemList = new ArrayList<>();
 
     int position;
 
+    int number;
+    private ArrayList<String> roomTypeList = new ArrayList<>();
+    private ArrayList<String> roomnumberList = new ArrayList<>();
+
+    private String Uid;
+    private String destinaionUid;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();;
     FirebaseDatabase chatRoomdatabase = FirebaseDatabase.getInstance();
 
+
+    int count;
+
     String stEmail;
+    String roomUid;
     ChatRoom chatRoom = new ChatRoom();
 
     public User user;
@@ -140,29 +159,86 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        chatRoomdatabase = FirebaseDatabase.getInstance();
+//        chatRoomdatabase = FirebaseDatabase.getInstance();
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 //데이터 받기
+                itemList.remove(position);
+                DatabaseReference roomRef = chatRoomdatabase.getReference("Room").child(roomUid).child("type");
+                HashMap<String, Object> up = new HashMap<>();
                 String result = data.getStringExtra("result");
                 if(result.equals("Student")) {
-                    itemList.remove(position);
                     itemList.add(new GridItem(R.drawable.loading, "mentee"));
-                    itemList.add(new GridItem(R.drawable.plus_icon, "create"));
                     mGridAdapter.notifyDataSetChanged();
-
+                    up.put("roomType", "Student");
+                    roomRef.setValue(up);
                 }
                 else if(result.equals("Graduate")) {
-                    itemList.remove(position);
                     itemList.add(new GridItem(R.drawable.mortarboard, "mentee"));
-                    itemList.add(new GridItem(R.drawable.plus_icon, "create"));
                     mGridAdapter.notifyDataSetChanged();
+                    up.put("roomType", "Graduate");
+                    roomRef.setValue(up);
                 }
             }
         }
     }
     private void bindGrid() {
-        itemList.add(new GridItem(R.drawable.plus_icon, "create"));
+
+        DatabaseReference room = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("count");
+        room.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count = Integer.parseInt(snapshot.getValue().toString());
+                try {
+                    callCount(count);
+
+                }catch (Exception e){
+                    System.out.println("fucking exception!!!!!!!" + e);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+//        DatabaseReference roomtype = chatRoomdatabase.getReference("Room").child("chatRoom").child(roomUid).child("type").child("roomType");
+//        if(count > 0){
+//            roomtype.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    String type = snapshot.getValue().toString();
+//                    roomTypeList.add(type);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+//
+//
+//
+//            System.out.println("room type :                 " + roomTypeList);
+//        }
+//
+//        else{
+//            //  카운트 0일때
+//        }
+
+        try {
+            Thread.sleep(3000);
+            itemList.add(new GridItem(R.drawable.plus_icon, "create"));
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
 
         GridView gridView = (GridView) findViewById(R.id.gridview);
         mGridAdapter = new GridArrayAdapter(this, itemList);
@@ -173,9 +249,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImageItemClick(String a_name, int a_position) {
                 stEmail = getIntent().getStringExtra("usr_id");
+                position = a_position+1;
 
-                DatabaseReference ref = chatRoomdatabase.getReference("Room").child("chatRoom");
-                DatabaseReference userRef = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("chatUid");
+                roomUid = mAuth.getCurrentUser().getUid() + position + "uiIsSbywnnMJ6xFqeB6FhSULAdw2";
+                DatabaseReference ref = chatRoomdatabase.getReference("Room").child(roomUid);
+                DatabaseReference userRef = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("position");
 
                 if(a_name == "create") {
                     // popup
@@ -187,26 +265,30 @@ public class MainActivity extends AppCompatActivity {
 
                     startActivityForResult(intent, 1);
 
-                    position = a_position;
 
                     // 여기에 채팅방 생성 코드 넣어보자
                     // random user id 가져와서 생성되게 만들
-
-                    Hashtable<String, String> value = new Hashtable<>();
+                    count += 1;
 //                    DatabaseReference chref = chatRoomdatabase.getReference("chatRoom");
-                    String roomUid = mAuth.getCurrentUser().getUid() + "uiIsSbywnnMJ6xFqeB6FhSULAdw2";
-                    value.put("chatRoomUid", roomUid);
+                    HashMap<String, String> value = new HashMap<>();
+                    HashMap<String, Object> user_value = new HashMap<>();
 
-//                    ref.addChildEventListener(childEventListener);
-//                    ref.push().setValue("");
+                    value.put("roomUid", roomUid);
                     ref.setValue(value);
-                    userRef.setValue(value);
+
+                    user_value.put(Integer.toString(position), roomUid);
+                    userRef.updateChildren(user_value);
+
+                    // change count
+                    chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("count").setValue(count);
+
                 }
                 else if(a_name == "mentee") {
                     // 멘티랑 1대1 채팅방 실행
                     Intent in = new Intent(MainActivity.this, ChatActivity.class);
 
                     in.putExtra("usr_id", stEmail);
+                    in.putExtra("room_uid", roomUid);
                     in.putExtra("usr_type", user.userType);
 
                     startActivity(in);
@@ -214,5 +296,102 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         gridView.setAdapter(mGridAdapter);
+    }
+
+    public void callCount(int count){
+        DatabaseReference roomnumber = chatRoomdatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("position");
+        System.out.println("user id :                                         " + mAuth.getCurrentUser().getUid());
+
+        if (count > 0) {
+
+            roomnumber.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        roomnumberList.add(postSnapshot.getValue().toString());
+                        System.out.println("Room Number List in in in in in in in" + roomnumberList);
+                        callRoomnumber(roomnumberList);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+//            roomnumber.addChildEventListener(new ChildEventListener() {
+//                @Override
+//                public void onChildAdded(@NonNull DataSnapshot snapshot, String previousChildName) {
+//                    Position position1 = snapshot.getValue(Position.class);
+//                    String num = position1.getRoomNum();
+//                    roomTypeList.add(num);
+//                    System.out.println("Room type List!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + num);
+//                }
+//
+//                @Override
+//                public void onChildChanged(@NonNull DataSnapshot snapshot, String previousChildName) {
+//
+//                }
+//
+//                @Override
+//                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//                }
+//
+//                @Override
+//                public void onChildMoved(@NonNull DataSnapshot snapshot, String previousChildName) {
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+
+//            System.out.println(roomTypeList.get(0));
+
+        }
+    }
+
+    public void callRoomnumber (ArrayList<String> roomnumberList){
+        for (int i = 0; i < roomnumberList.size(); i++) {
+
+            System.out.println("Room Number List out out out out out out out out " + roomnumberList.get(i));
+
+            DatabaseReference ref = chatRoomdatabase.getReference("Room").child(roomUid);
+            HashMap<String, String> temp = new HashMap<>();
+            temp.put("roomType", "Student");
+            ref.child("type").setValue(temp);
+
+            DatabaseReference roomtype = chatRoomdatabase.getReference("Room").child(roomnumberList.get(i)).child("type").child("roomType");
+            roomtype.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    roomTypeList.add(snapshot.getValue().toString());
+                    callRoomType(roomTypeList);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+    }
+
+    private void callRoomType (ArrayList<String> roomTypeList) {
+        for (int i = 0; i < roomTypeList.size(); i++) {
+            if (roomTypeList.get(i).equals("Student")) {
+                itemList.add(new GridItem(R.drawable.loading, "mentee"));
+                mGridAdapter.notifyDataSetChanged();
+            } else {
+                System.out.println("adhskfhjsdklfjdskasfsdfsdfdsfasfasdf");
+                itemList.add(new GridItem(R.drawable.mortarboard, "mentee"));
+                mGridAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }

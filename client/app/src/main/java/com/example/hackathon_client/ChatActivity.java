@@ -37,6 +37,7 @@ ChatActivity extends AppCompatActivity {
     EditText etText;
     Button btnSend;
     String stEmail;
+    String roomUid;
     String user_type;
     FirebaseDatabase database;
     ArrayList<Chat> chatArrayList;
@@ -55,6 +56,7 @@ ChatActivity extends AppCompatActivity {
 
         chatArrayList = new ArrayList<>();
         stEmail = getIntent().getStringExtra("usr_id");
+        roomUid = getIntent().getStringExtra("room_uid");
         user_type = getIntent().getStringExtra("usr_type");
 
         Button btnfinish = (Button) findViewById(R.id.btnFinish);
@@ -90,7 +92,6 @@ ChatActivity extends AppCompatActivity {
 
                 // A new comment has been added, add it to the displayed list
                 Chat chat = dataSnapshot.getValue(Chat.class);
-                String commentKey = dataSnapshot.getKey();
                 String stEmail = chat.getEmail();
                 String text = chat.getText();
                 Log.d(TAG, "stEmail : " + stEmail);
@@ -139,7 +140,10 @@ ChatActivity extends AppCompatActivity {
                         //Toast.LENGTH_SHORT).show();
             }
         };
-        DatabaseReference getRef = database.getReference("Room").child("chatRoom").child("message");
+        stEmail = getIntent().getStringExtra("usr_id");
+        roomUid = getIntent().getStringExtra("room_uid");
+
+        DatabaseReference getRef = database.getReference("Room").child(roomUid).child("message");
         getRef.addChildEventListener(childEventListener);
 
 
@@ -154,7 +158,7 @@ ChatActivity extends AppCompatActivity {
                 SimpleDateFormat dataformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String datatime = dataformat.format(c.getTime());
 
-                DatabaseReference myRef = database.getReference("Room").child("chatRoom").child("message").child(datatime);
+                DatabaseReference myRef = database.getReference("Room").child(roomUid).child("message").child(datatime);
 
                 Hashtable<String, String> values = new Hashtable<String, String>();
                 values.put("email", stEmail);
