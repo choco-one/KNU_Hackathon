@@ -93,7 +93,7 @@ public class MatchingService {
                 if(gaddRequest.getCompany().toString().equals("PUBLICCO")){
                     matching.setMatchingOption("1");
                 }
-                else if(gaddRequest.getMajor().toString().equals("PRIVATECO")){
+                else if(gaddRequest.getCompany().toString().equals("PRIVATECO")){
                     matching.setMatchingOption("2");
                 }
             }
