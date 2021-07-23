@@ -3,15 +3,10 @@ package com.example.hackathon_client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.RadioGroup;
 
 public class UserTypePopupActivity extends Activity {
-    public RadioGroup radioGroup_company;
-    public RadioGroup radioGroup_major;
-    public RadioGroup radioGroup_gender;
     public String stEmail;
     public String userType;
     @Override
@@ -44,20 +39,18 @@ public class UserTypePopupActivity extends Activity {
 
         Intent intent = new Intent();
         intent.putExtra("result", "Graduate");
+
         setResult(RESULT_OK, intent);
         //액티비티(팝업) 닫기
         finish();
-        Intent intent2 = new Intent(UserTypePopupActivity.this, GraduatePopupActivity.class);
-        startActivityForResult(intent2, 1);
-    }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
-            return false;
-        }
-        return true;
+        Intent intent2 = new Intent(UserTypePopupActivity.this, GraduatePopupActivity.class);
+        intent2.putExtra("usr_id", stEmail);
+        intent2.putExtra("usr_type", userType);
+
+
+
+        startActivityForResult(intent2, 1);
     }
 
     @Override

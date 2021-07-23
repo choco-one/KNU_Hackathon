@@ -38,6 +38,7 @@ public class MypageEditActivity extends AppCompatActivity {
     public EditText user_interest;
 
     public Button edit_ok;
+
     public RadioButton simcom;
     public RadioButton global;
     public RadioButton fresh;
@@ -46,6 +47,8 @@ public class MypageEditActivity extends AppCompatActivity {
 
     public String url;
     public StringRequest stringRequest;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class MypageEditActivity extends AppCompatActivity {
         user_career = findViewById(R.id.user_career);
         user_interest = findViewById(R.id.user_interest);
         edit_ok = findViewById(R.id.editOK_btn);
+
         user_stdnum = findViewById(R.id.user_stdnum);
 
         major = findViewById(R.id.major);
@@ -97,13 +101,12 @@ public class MypageEditActivity extends AppCompatActivity {
 
         user_phone.setHint(user.tel_number);
 
-        if(!user.career.equals("")){
+        if(user.career!=null){
             user_career.setHint(user.career);
         }
-        if(!user.interest.equals("")){
+        if(user.interest!=null){
             user_interest.setHint(user.interest);
         }
-        user_career.setHint(user.career);
 
         edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +191,7 @@ public class MypageEditActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override

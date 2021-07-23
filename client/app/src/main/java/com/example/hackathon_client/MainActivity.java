@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_mypage:
                         Intent b = new Intent(MainActivity.this, MypageActivity.class);
                         b.putExtra("usr_id", usr_id_from_login);
-                        b.putExtra("usr_type", user.userType);
+                        //b.putExtra("usr_type", user.userType);
                         startActivity(b);
                         break;
                 }
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 user = gson.fromJson(response, User.class);
+                System.out.println(user.userType + user.email);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -182,7 +183,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("usr_id", stEmail);
                     intent.putExtra("usr_type", user.userType);
 
+                    System.out.println(user.userType + stEmail);
+
                     startActivityForResult(intent, 1);
+
                     position = a_position;
 
                     // 여기에 채팅방 생성 코드 넣어보자
@@ -203,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent in = new Intent(MainActivity.this, ChatActivity.class);
 
                     in.putExtra("usr_id", stEmail);
+                    in.putExtra("usr_type", user.userType);
+
                     startActivity(in);
                 }
             }

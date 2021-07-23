@@ -18,6 +18,7 @@
         android:background="@drawable/theme_chatroom_bubble_me_02_image"
         android:padding="10dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         />
 

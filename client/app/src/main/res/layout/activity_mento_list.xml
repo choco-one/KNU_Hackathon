@@ -22,7 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/edge3"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="재학생 멘토 / 멘티 목록"
+            android:textScaleX="0.9"
+            android:fontFamily="@font/gbold"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold">

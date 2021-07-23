@@ -40,12 +40,14 @@ public class MypageActivity extends AppCompatActivity {
     private TextView user_gender;
     private TextView user_type;
     public User user;
+    public Button logout_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
 
+        logout_btn = findViewById(R.id.logout_btn);
         user_email = findViewById(R.id.user_email);
         user_name = findViewById(R.id.user_name);
         user_phone = findViewById(R.id.user_phone);
@@ -139,6 +141,7 @@ public class MypageActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

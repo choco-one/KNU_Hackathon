@@ -3,7 +3,6 @@ package com.example.hackathon_client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
@@ -74,6 +73,9 @@ public class MatchingPopupActivity extends Activity {
             //데이터 전달하기
             Intent intent = new Intent();
             intent.putExtra("result", "Close Popup");
+            intent.putExtra("check_gender", selected_gender);
+            intent.putExtra("check_major", selected_major);
+
             setResult(RESULT_OK, intent);
             System.out.println(userType + " "+stEmail + " "+ selected_gender + " "+selected_major);
 
@@ -115,14 +117,7 @@ public class MatchingPopupActivity extends Activity {
         queue.add(stringRequest);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
-            return false;
-        }
-        return true;
-    }
+
 
     @Override
     public void onBackPressed() {
