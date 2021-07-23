@@ -12,4 +12,5 @@ public class User implements Serializable {
     public String interest;
     public String career;
     public String std_number;
+    public String uid;
 }

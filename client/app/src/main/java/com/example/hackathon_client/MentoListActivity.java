@@ -2,9 +2,7 @@ package com.example.hackathon_client;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,16 +60,5 @@ public class MentoListActivity extends AppCompatActivity {
         });
         navigation.getMenu().getItem(1).setChecked(true);
     }
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.main_btn_add : {
-                i ++;
-                count.add(i);
-                RvAdapter adapter = new RvAdapter(getApplication(), count, i);
-                rv.setAdapter(adapter);
-                Log.d("Count", count + "");
-                break;
-            }
-        }
-    }
+
 }

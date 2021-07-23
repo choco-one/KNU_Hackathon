@@ -3,6 +3,7 @@ package com.example.hackathon_client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +28,10 @@ public class GraduatePopupActivity extends Activity {
     public String stEmail;
     public RequestQueue queue;
     public RadioGroup rg_company;
+    public String uid;
 
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/matching/gadd";
 
     @Override
@@ -63,9 +68,11 @@ public class GraduatePopupActivity extends Activity {
             setResult(RESULT_OK, intent);
 
             //액티비티(팝업) 닫기
-            System.out.println(stEmail + " "+ userType + " "+ selected_company);
+
             finish();
-            pushGraduatePop( stEmail,  userType,  selected_company,  "GRADUATE");
+            uid = mAuth.getCurrentUser().getUid();
+            System.out.println(stEmail + " "+ userType + " "+ selected_company + uid);
+            pushGraduatePop( stEmail,  userType,  selected_company,  "GRADUATE", uid);
         } else{
             //unchecked
             Toast.makeText(GraduatePopupActivity.this, "선택을 완료해주세요.", Toast.LENGTH_LONG).show();
@@ -73,12 +80,14 @@ public class GraduatePopupActivity extends Activity {
 
     }
 
-    void pushGraduatePop(String email, String userType, String company, String matching_type){
+    void pushGraduatePop(String email, String userType, String company, String matching_type, String uid){
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //
                 //Toast.makeText(GraduatePopupActivity.this, response, Toast.LENGTH_LONG).show();
+//                String[] response_email = response.split(" ");
+//                System.out.println(response_email[0]+response_email[1]);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -93,13 +102,21 @@ public class GraduatePopupActivity extends Activity {
                 params.put("userType", userType);
                 params.put("company", company);
                 params.put("matchingType", matching_type);
+                params.put("uid", uid);
 
                 return params;
             }
         };
         queue.add(stringRequest);
     }
-
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //바깥레이어 클릭시 안닫히게
+        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+            return false;
+        }
+        return true;
+    }
     @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기

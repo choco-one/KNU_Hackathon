@@ -17,22 +17,23 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#fff"
+            android:fontFamily="@font/gbold"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp">
+
         <TextView
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+
+            android:layout_marginLeft="20dp"
             android:gravity="center"
             android:text="전공"
             android:textStyle="bold"
@@ -42,16 +43,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal"
             android:id="@+id/radioGroup_major">
             <RadioButton
                 android:id="@+id/computer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="50dp"
                 android:button="@drawable/custom_radio_button"
                 android:text="심컴"
                 android:paddingLeft="5dp"
-                android:layout_marginRight="15dp"
+
                 android:textColor="#3D3838" />
             <RadioButton
                 android:id="@+id/globalSW"
@@ -62,28 +65,22 @@
                 android:paddingLeft="5dp"
                 android:layout_marginRight="15dp"
                 android:text="글솝" />
-            <RadioButton
-                android:id="@+id/any_major"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:button="@drawable/custom_radio_button"
-                android:textColor="#3D3838"
-                android:text="상관 없음" />
         </RadioGroup>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="성별"
             android:textSize="16dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="#DC8181"
@@ -92,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal"
             android:id="@+id/radioGroup_gender">
 
@@ -100,8 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+
                 android:button="@drawable/custom_radio_button"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="50dp"
                 android:textColor="#3D3838"
                 android:text="남자" />
 
@@ -114,14 +113,6 @@
                 android:layout_marginRight="15dp"
                 android:textColor="#3D3838"
                 android:text="여자" />
-            <RadioButton
-                android:id="@+id/any_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/custom_radio_button"
-                android:textColor="#3D3838"
-                android:paddingLeft="5dp"
-                android:text="상관 없음" />
         </RadioGroup>
     </LinearLayout>
 

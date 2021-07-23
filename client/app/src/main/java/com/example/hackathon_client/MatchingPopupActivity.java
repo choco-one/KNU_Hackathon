@@ -3,6 +3,7 @@ package com.example.hackathon_client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +27,13 @@ public class MatchingPopupActivity extends Activity {
     public RadioGroup rg_gender;
     public String stEmail;
     public String userType;
+    public String uid;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public StringRequest stringRequest;
     public RequestQueue queue;
+
 
     String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/matching/add";
 
@@ -77,12 +83,14 @@ public class MatchingPopupActivity extends Activity {
             intent.putExtra("check_major", selected_major);
 
             setResult(RESULT_OK, intent);
-            System.out.println(userType + " "+stEmail + " "+ selected_gender + " "+selected_major);
+
 
 
             //액티비티(팝업) 닫기
             finish();
-            pushPop(stEmail, userType, selected_major, selected_gender, "STUDENT");
+            uid = mAuth.getCurrentUser().getUid();
+            System.out.println(userType + " "+stEmail + " "+ selected_gender + " "+selected_major + " " + uid);
+            pushPop(stEmail, userType, selected_major, selected_gender, "STUDENT", uid);
 
         } else{
             //안된경우
@@ -90,7 +98,7 @@ public class MatchingPopupActivity extends Activity {
         }
     }
 
-    void pushPop(String email, String userType, String major, String gender, String matching_type){
+    void pushPop(String email, String userType, String major, String gender, String matching_type, String uid){
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -104,12 +112,14 @@ public class MatchingPopupActivity extends Activity {
         }) {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
+
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("userType", userType);
                 params.put("major", major);
                 params.put("gender", gender);
                 params.put("matchingType", matching_type);
+                params.put("uid", uid);
 
                 return params;
             }
@@ -117,7 +127,14 @@ public class MatchingPopupActivity extends Activity {
         queue.add(stringRequest);
     }
 
-
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //바깥레이어 클릭시 안닫히게
+        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public void onBackPressed() {

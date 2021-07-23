@@ -24,6 +24,11 @@
         android:text="나가기"
         android:id="@+id/btnFinish"
         android:background="@drawable/edge3"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/gbold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -43,6 +48,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/edge3"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/gbold"
         android:text="전송 "
         android:id="@+id/btnSend"
         />
@@ -55,6 +65,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSend"
         android:background="#F1D9D1"
+        android:paddingLeft="5dp"
+        android:fontFamily="@font/gmedium"
         android:id="@+id/etText"
         />
 
