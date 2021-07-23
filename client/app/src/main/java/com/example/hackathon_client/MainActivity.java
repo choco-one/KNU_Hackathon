@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         try {
-            Thread.sleep(3000);
+            //Thread.sleep(3000);
             itemList.add(new GridItem(R.drawable.plus_icon, "create"));
         }catch (Exception e){
             System.out.println(e);
