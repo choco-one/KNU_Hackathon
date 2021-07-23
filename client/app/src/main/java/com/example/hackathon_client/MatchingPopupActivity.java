@@ -103,6 +103,11 @@ public class MatchingPopupActivity extends Activity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(MatchingPopupActivity.this, response, Toast.LENGTH_LONG).show();
+
+                Intent toMainActivity = new Intent(MatchingPopupActivity.this, MainActivity.class);
+
+                toMainActivity.putExtra("matching_response", response);
+
             }
         }, new Response.ErrorListener() {
             @Override

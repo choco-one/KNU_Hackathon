@@ -2,7 +2,6 @@ package com.example.hackathon_client;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -26,21 +25,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.sql.Types.NULL;
 
 public class MainActivity extends AppCompatActivity {
     List<GridItem> itemList = new ArrayList<>();
@@ -55,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private String destinaionUid;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();;
     FirebaseDatabase chatRoomdatabase = FirebaseDatabase.getInstance();
+
+    public String fromMatching;
+    Intent intent = getIntent();
+
 
 
     int count;
@@ -90,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         String usr_id_from_login = intent.getStringExtra("usr_id");
+
+        fromMatching = intent.getStringExtra("matching_response");
 
         queue = Volley.newRequestQueue(this);
         String url = "http://ec2-3-37-147-187.ap-northeast-2.compute.amazonaws.com/api/user/" + usr_id_from_login;
