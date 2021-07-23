@@ -111,10 +111,10 @@ public class MatchingService {
             DocumentReference documentReference = documents.next();
             String doc_id = documentReference.getId();
 
-            Matching matching_db = info(doc_id);
+            Matching matching_db = ginfo(doc_id);
 
             if((Integer.parseInt(matching.getMatchingOption()) + Integer.parseInt(matching_db.getMatchingOption()) == 5)){
-                delete(matching_db.getId());
+                gdelete(matching_db.getId());
                 return matching.getEmail() + " " + matching_db.getEmail();
             }
         }
