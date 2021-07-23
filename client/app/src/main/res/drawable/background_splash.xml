@@ -5,9 +5,9 @@
         android:drawable="@color/back"/>
     <!-- 로고 -->
     <item
-        android:drawable="@drawable/loading"
-        android:height="120dp"
-        android:width="120dp"
+        android:drawable="@drawable/load"
+        android:height="140dp"
+        android:width="140dp"
         android:gravity="center"
         >
     </item>
